@@ -12,10 +12,10 @@ import { CiCirclePlus } from "react-icons/ci";
 
 const SidebarLink = ({ icon, label, active }) => (
   <div
-    className={`flex items-center gap-3 py-2 px-4 rounded-lg cursor-pointer ${
+    className={`flex items-center gap-3 py-2 px-4 rounded-lg cursor-pointer  ${
       active ? " text-black" : "hover:bg-gray-300"
     }`}
-  >
+   >
     {React.createElement(icon, { size: 20 })}
     <span>{label}</span>
   </div>
@@ -35,9 +35,9 @@ const SidebarLink = ({ icon, label, active }) => (
 
 const Dashboard = () => {
   return (
-    <div className="flex h-screen  bg-zinc-100  py-8 px-4 ">
+    <div className="flex h-screen  bg-zinc-100  py-8 px-4 " >
       {/* Sidebar */}
-      <div className="w-64 bg-white shadow-xl p-2 flex flex-col gap-3 rounded-xl overflow-hidden ">
+      <div className="w-64 bg-white shadow-xl p-2 flex flex-col gap-3 rounded-xl overflow-hidden " >
         
           <h2 className="flex justify-start items-center text-xl font-semibold gap-0.5  pt-4">
             <img src="src\assets\logo1.jpg" alt="" style={{ height: "3.2rem" }} />{" "}
