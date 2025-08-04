@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import BannerCard from '../components/BannerCard'
 import { URL } from '../constants/api.js';
 import axios from 'axios';
+import { Navbar } from '../components/Navbar.jsx';
+import NavbarHorizontal from '../components/NavbarHorizontal.jsx';
 
 export const BannerPage = () => {
     const [error, SetError] = useState(false);
@@ -45,13 +47,17 @@ export const BannerPage = () => {
     }
 
     return (
-        <div className=' bg-zinc-100 '>
-            <div className='grid grid-cols-3'>
-                {
-                    banners.BannerDetails.map((banner, idx) => {
-                        return <BannerCard url={banner.BannerUrl} BannerName={banner.BannerName} key={idx}></BannerCard>
-                    })
-                }
+        <div className=' bg-zinc-100 flex'>
+            <Navbar></Navbar>
+            <div className=''>
+                <NavbarHorizontal></NavbarHorizontal>
+                <div className='grid grid-cols-3 gap-2'>
+                    {
+                        banners.BannerDetails.map((banner, idx) => {
+                            return <BannerCard url={banner.BannerUrl} BannerName={banner.BannerName} key={idx}></BannerCard>
+                        })
+                    }
+                </div>
 
             </div>
         </div>

@@ -2,7 +2,7 @@ import React from 'react'
 
 const BannerCard = (props) => {
   return (
-    <div className=' flex bg-white p-2 rounded-2xl shadow-2xl shadow-gray-300 hover:shadow-gray-400 transition-shadow duration-200 mx-5 my-2 h-[15rem] w-[25rem]'>
+    <div className=' flex bg-white p-1.5 rounded-2xl shadow-2xl shadow-gray-300 hover:shadow-gray-400 transition-shadow duration-200 mx-3 my-2 h-[15rem] w-[22rem]'>
         {/* image section */}
         <div className='p-4 mr-5'>
             <img src={props.url} className=' h-40 w-80 rounded-2xl'></img>

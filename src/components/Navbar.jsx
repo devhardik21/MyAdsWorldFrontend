@@ -33,7 +33,7 @@ const SidebarLink = ({ icon, label, active }) => (
 //   </div>
 // );
 
-const Dashboard = () => {
+const Navbar = () => {
   return (
     <div className="flex h-screen  bg-zinc-100  py-8 px-4 " >
       {/* Sidebar */}
@@ -79,4 +79,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export {Navbar};
