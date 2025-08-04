@@ -3,7 +3,7 @@ import axios from "axios";
 import { URL } from "../constants/api";
 import { Card } from "../components/Card";
 import NavbarHorizontal from "../components/NavbarHorizontal";
-import Dashboard from "../components/Dashboard";
+import Dashboard from "../components/Navbar";
 const CategoryPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
