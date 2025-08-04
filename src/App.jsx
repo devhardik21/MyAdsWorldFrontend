@@ -2,7 +2,6 @@
 
 // import "./App.css";
 // import Cards from "./components/Cards";
-import {Navbar} from "./components/Navbar";
 import NavbarHorizontal from "./components/NavbarHorizontal";
 
 import { Card } from "./components/Card";
@@ -20,8 +19,8 @@ function App() {
 
         {/* <Cards/> */}
 
-        <CategoryPage></CategoryPage>
-        {/* <BannerPage></BannerPage> */}
+        {/* <CategoryPage></CategoryPage> */}
+        <BannerPage></BannerPage>
       </div>
 
      

@@ -11,7 +11,7 @@ function Card(props) {
                     />
                 </div>
                 <div className="flex-1 min-w-0">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-5 truncate">
+                    <h3 className="text-xl font-semibold text-emerald-900 mb-5 truncate">
                         {props.Name}
                     </h3>
                     <div className="space-y-2">
