@@ -3,7 +3,7 @@ import axios from "axios";
 import { URL } from "../constants/api";
 import { Card } from "../components/Card";
 import NavbarHorizontal from "../components/NavbarHorizontal";
-import Dashboard from "../components/Navbar";
+import {Navbar} from "../components/Navbar";
 const CategoryPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -41,7 +41,7 @@ const CategoryPage = () => {
   return (
     <>
       <div className="flex ">
-        <Dashboard></Dashboard>
+        <Navbar></Navbar>
 
         <div className="bg-zinc-100 flex-1">
         <NavbarHorizontal />

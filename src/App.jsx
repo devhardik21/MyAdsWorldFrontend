@@ -2,7 +2,7 @@
 
 // import "./App.css";
 // import Cards from "./components/Cards";
-import Dashboard from "./components/Navbar";
+import {Navbar} from "./components/Navbar";
 import NavbarHorizontal from "./components/NavbarHorizontal";
 
 import { Card } from "./components/Card";
