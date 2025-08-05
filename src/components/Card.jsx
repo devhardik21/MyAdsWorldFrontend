@@ -1,6 +1,6 @@
 function Card(props) {
     return (
-        <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-5 mx-3 h-50 ">
+        <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-5 mx-3 h-50 my-2">
             
             <div className="flex items-start gap-4 mb-6">
                 <div className="flex-shrink-0">
@@ -18,12 +18,12 @@ function Card(props) {
                         <div className="flex items-center text-sm text-gray-600 mb-3">
                             <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
                             <span className="font-medium mr-1">Listings:</span>
-                            <span>{props.NumberofCompanies}</span>
+                            <span>{props.NumberofCompanies }</span>
                         </div>
                         <div className="flex items-center text-sm text-gray-600">
                             <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
                             <span className="font-medium mr-1">Categories:</span>
-                            <span>{props.NumberofSub}</span>
+                            <span>{props.NumberofSub }</span>
                         </div>
                     </div>
                 </div>

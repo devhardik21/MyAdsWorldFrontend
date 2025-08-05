@@ -8,6 +8,8 @@ import {
   FiPackage,
   FiShoppingCart,
 } from "react-icons/fi";
+
+import { useNavigate } from "react-router-dom";
 import { CiCirclePlus } from "react-icons/ci";
 
 const SidebarLink = ({ icon, label, active }) => (
@@ -34,6 +36,7 @@ const SidebarLink = ({ icon, label, active }) => (
 // );
 
 const Navbar = () => {
+  const navigate = useNavigate() ;
   return (
     <div className="flex h-screen  bg-zinc-100  py-8 px-4 " >
       {/* Sidebar */}
@@ -51,9 +54,9 @@ const Navbar = () => {
         <SidebarLink icon={FiUser} label="Users" />
         <SidebarLink icon={FiBell} label="Notification" />
         <p className="mt-2 text-zinc-600 text-sm uppercase">Master Pages</p>
-        <SidebarLink icon={FiList} label="Categories" />
+       <button onClick={()=>navigate('/category')}><SidebarLink icon={FiList} label="Categories" /></button>
         <SidebarLink icon={FiGrid} label="Sub-Categories" />
-        <SidebarLink icon={FiPackage} label="Banner" />
+       <button onClick={()=>navigate('/banner')}> <SidebarLink icon={FiPackage} label="Banner" /> </button>
         <SidebarLink icon={FiPackage} label="Feature" />
         {/* <p className="mt-2 text-zinc-200 text-sm uppercase">Account Pages</p>
         <SidebarLink icon={FiUser} label="Profile" /> */}
