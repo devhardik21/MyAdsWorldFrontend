@@ -1,29 +1,20 @@
-// import { useState } from 'react'
-
-// import "./App.css";
-// import Cards from "./components/Cards";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavbarHorizontal from "./components/NavbarHorizontal";
-
 import { Card } from "./components/Card";
-
 import BannerCard from "./components/BannerCard";
 import { BannerPage } from "./pages/BannerPage";
 import { CategoryPage } from "./pages/CategoryPage";
+import DashboardCards from "./components/DashboardCards";
+import { Navbar } from "./components/Navbar";
+import MenuPage from "./components/MenuPage";
 function App() {
   return (
     <>
-      <div className="relative h-screen bg-zinc-400  flex-1 ">
-        {/* <Dashboard />
-
-        <NavbarHorizontal /> */}
-
-        {/* <Cards/> */}
-
-        {/* <CategoryPage></CategoryPage> */}
+      <div className="h-screen bg-zinc-400  flex-1 ">
         <BannerPage></BannerPage>
+        {/* <MenuPage/> */}
       </div>
 
-     
     </>
   );
 }

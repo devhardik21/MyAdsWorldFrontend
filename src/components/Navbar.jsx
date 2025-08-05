@@ -10,6 +10,7 @@ import {
 } from "react-icons/fi";
 import { CiCirclePlus } from "react-icons/ci";
 
+
 const SidebarLink = ({ icon, label, active }) => (
   <div
     className={`flex items-center gap-3 py-2 px-4 rounded-lg cursor-pointer  ${

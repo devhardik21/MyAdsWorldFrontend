@@ -24,7 +24,7 @@ function NavbarHorizontal() {
   return (
     <>
       {/* Horizontal Bar */}
-      <div className="flex-1 flex-col py-10 px-4 bg-zinc-100 ">
+      <div className="flex flex-col py-10 px-4 bg-zinc-100  ">
         <div className=" bg-white shadow-xl p-4 rounded-xl justify-between items-center flex ">
           <div>
             <p className="text-md text-muted  opacity-50 mb-1">
