@@ -5,6 +5,9 @@ import './index.css'
 import App from './App.jsx'
 import { CategoryPage } from './pages/CategoryPage.jsx'
 import { BannerPage } from './pages/BannerPage.jsx'
+import FeaturePage from './pages/FeaturePage.jsx'
+import Subcategory from './pages/Subcategory.jsx'
+// import FeaturePage from './pages/FeaturePage.jsx'
 const routes = createBrowserRouter([
   {
     path : '/',
@@ -17,6 +20,14 @@ const routes = createBrowserRouter([
   {
       path : '/banner',
       element : <BannerPage></BannerPage>
+  },
+  {
+    path : '/subcategory',
+    element : <Subcategory></Subcategory>
+  },
+  {
+    path : '/features',
+    element : <FeaturePage></FeaturePage>
   }
 ])
 
