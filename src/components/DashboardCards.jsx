@@ -27,25 +27,25 @@ const DashboardCards = () => {
           icon={FiUser}
           title="Total Vendors"
           count="34"
-          color="bg-blue-300"
+          color="bg-blue-500"
         />
         <Card
           icon={FiUser}
           title="Total Users"
           count="12"
-          color="bg-blue-300"
+          color="bg-blue-500"
         />
         <Card
           icon={FiPackage}
           title="Total Categories"
           count="9"
-          color="bg-blue-300"
+          color="bg-blue-500"
         />
         <Card
           icon={FiGrid}
           title="Total Sub Categories"
           count="33"
-          color="bg-blue-300"
+          color="bg-blue-500"
         />
       </div>
     </div>
