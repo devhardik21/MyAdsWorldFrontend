@@ -41,9 +41,9 @@ const Navbar = () => {
   return (
     <div className="flex h-screen  bg-zinc-100  py-8 px-4 " >
       {/* Sidebar */}
-      <div className="w-64 bg-white shadow-xl p-2 flex flex-col gap-3 rounded-xl overflow-hidden " >
+      <div className="w-64 bg-blue-200 shadow-xl p-2 flex flex-col gap-3 rounded-xl overflow-hidden " >
         
-          <h2 className="flex justify-start items-center text-xl font-semibold gap-0.5  pt-4">
+          <h2 className="flex justify-start items-center text-xl font-semibold gap-1 mx-3 pt-4">
             <img src="src\assets\logo1.jpg" alt="" style={{ height: "3.2rem" }} />{" "}
             My Ads World
           </h2>
