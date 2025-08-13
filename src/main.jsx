@@ -7,11 +7,12 @@ import { CategoryPage } from './pages/CategoryPage.jsx'
 import { BannerPage } from './pages/BannerPage.jsx'
 import FeaturePage from './pages/FeaturePage.jsx'
 import Subcategory from './pages/Subcategory.jsx'
+import DashboardPage from './pages/DashboardPage.jsx'
 // import FeaturePage from './pages/FeaturePage.jsx'
 const routes = createBrowserRouter([
   {
     path : '/',
-    element : <App></App>
+    element : <DashboardPage></DashboardPage>
   },
   {
       path : '/category',
@@ -28,7 +29,8 @@ const routes = createBrowserRouter([
   {
     path : '/features',
     element : <FeaturePage></FeaturePage>
-  }
+  },
+ 
 ])
 
 createRoot(document.getElementById('root')).render(

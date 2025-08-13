@@ -5,10 +5,12 @@ import MenuPage from "./components/MenuPage";
 import DashboardCards from "./components/DashboardCards";
 import FeatureCard from "./components/FeatureCard";
 import FeaturePage from "./pages/FeaturePage";
+import DashboardPage from "./pages/DashboardPage";
 function App() {
   return (
     <>
-      <FeaturePage></FeaturePage>
+      {/* <FeaturePage></FeaturePage> */}
+      <DashboardPage/>
     </>
   );
 }

@@ -49,7 +49,7 @@ const Navbar = () => {
           </h2>
           {/* <img src="src\assets\logo3.jpg" alt="" style={{ height: "3.2rem" }} /> */}
         
-        <SidebarLink icon={FiHome} label="Dashboard"  />
+        <button onClick={()=>navigate('/')}> <SidebarLink icon={FiHome} label="Dashboard"  /></button>
         <SidebarLink icon={FiShoppingCart} label="Bookings" />
         <SidebarLink icon={FiUser} label="Vendors" />
         <SidebarLink icon={FiUser} label="Users" />
