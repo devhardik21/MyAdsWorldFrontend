@@ -56,9 +56,9 @@ const Navbar = () => {
         <SidebarLink icon={FiBell} label="Notification" />
         <p className="mt-2 text-zinc-600 text-sm uppercase">Master Pages</p>
        <button onClick={()=>navigate('/category')}><SidebarLink icon={FiList} label="Categories" /></button>
-        <SidebarLink icon={FiGrid} label="Sub-Categories" />
+       <button onClick={()=>navigate('/subcategory')}> <SidebarLink icon={FiGrid} label="Sub-Categories" /> </button>
        <button onClick={()=>navigate('/banner')}> <SidebarLink icon={FiPackage} label="Banner" /> </button>
-        <SidebarLink icon={FiPackage} label="Feature" />
+        <button onClick={()=>navigate('/features')}><SidebarLink icon={FiPackage} label="Feature" /> </button>
         {/* <p className="mt-2 text-zinc-200 text-sm uppercase">Account Pages</p>
         <SidebarLink icon={FiUser} label="Profile" /> */}
       </div>
