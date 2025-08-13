@@ -13,8 +13,9 @@ function App() {
 
         {/* <CategoryPage></CategoryPage> */}
 
-        <Subcategory></Subcategory>
-
+        {/* <Subcategory></Subcategory> */}
+        
+        {/* <BannerPage/>*/}
 
      
     </>
