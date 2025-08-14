@@ -8,8 +8,23 @@ import NavbarHorizontal from '../components/NavbarHorizontal.jsx';
 export const BannerPage = () => {
     const [error, SetError] = useState(false);
     const [DisplayError, SetDisplayError] = useState('');
+    const [reload, setReload] = useState(false);
     const [loading, SetLoading] = useState(true);
     const [banners, SetBanners] = useState([]);
+
+    const DeleteBanner = async (id) => {
+        try {
+            const response = await axios.delete(`${URL}/api_admin/delete-banner/${id}`);
+            console.log(response.data);
+            setReload((prev) => !prev);
+            console.log('banner deleted');
+
+
+        } catch (error) {
+            console.log(`we got an error deleting the banner ${error}`);
+
+        }
+    }
 
     useEffect(() => {
 
@@ -33,7 +48,7 @@ export const BannerPage = () => {
         }
 
         FetchBanner()
-    }, [])
+    }, [reload])
 
     if (loading) {
         return (
@@ -54,7 +69,7 @@ export const BannerPage = () => {
                 <div className='grid grid-cols-3 gap-2'>
                     {
                         banners.BannerDetails.map((banner, idx) => {
-                            return <BannerCard url={banner.BannerUrl} BannerName={banner.BannerName} key={idx}></BannerCard>
+                            return <BannerCard url={banner.BannerUrl} BannerName={banner.BannerName} key={idx} DBid={banner._id} onDelete = {DeleteBanner}></BannerCard>
                         })
                     }
                 </div>
