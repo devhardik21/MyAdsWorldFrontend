@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Navbar } from '../components/Navbar'
 import axios from 'axios';
 import NavbarHorizontal from '../components/NavbarHorizontal'
@@ -8,12 +8,13 @@ import { URL } from '../constants/api';
 const Subcategory = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const [reload, setReload] = useState(false);
     const [subcategories, setSubCategories] = useState([]);
     const [DisplayError, SetDisplayError] = useState("");
     useEffect(() => {
         const FetchSubCategoryData = async () => {
             try {
-                const response = await axios(`${URL}/api_app/get-subcategory`);
+                const response = await axios.get(`${URL}/api_app/get-subcategory`);
                 setSubCategories(response.data);
                 setLoading(false);
 
@@ -26,8 +27,18 @@ const Subcategory = () => {
             }
         };
         FetchSubCategoryData();
-    }, []);
+    }, [reload]);
 
+    const DeleteSubCat = async (id) => {
+        try {
+            const response = await axios.delete(`${URL}/api_admin/delete-subcategory/${id}`);
+            console.log(response.data);
+            setReload((prev)=>!prev);
+        } catch (error) {
+            console.log(`we got an error deleting the sub category ${error}`);
+
+        }
+    }
     if (loading) {
         return <h2> Your Sub Categories are loading</h2>;
     }
@@ -46,16 +57,18 @@ const Subcategory = () => {
             <Navbar></Navbar>
             <div className='bg-zinc-100 flex-1'>
                 <NavbarHorizontal></NavbarHorizontal>
-            
-            <div className='grid grid-cols-3'>
-                {
-                    subcategories.AllSubCategory.map((subcategory,idx)=>{
-                        return(
-                            <Card key = {idx} url={subcategory.SubCategoryIcon} Name ={subcategory.SubCategoryName} NumberofCompanies={4} NumberofSub={2}></Card>
-                        )
-                    })
-                }
-            </div>
+
+                <div className='grid grid-cols-3'>
+                    {
+                        subcategories.AllSubCategory.map((subcategory, idx) => {
+                            return (
+                                <Card key={idx} url={subcategory.SubCategoryIcon} Name={subcategory.SubCategoryName} NumberofCompanies={4} NumberofSub={2} DBid={subcategory._id} onDelete={DeleteSubCat}>
+
+                                </Card>
+                            )
+                        })
+                    }
+                </div>
 
 
             </div>
