@@ -39,9 +39,9 @@ const SidebarLink = ({ icon, label, active }) => (
 const Navbar = () => {
   const navigate = useNavigate() ;
   return (
-    <div className="flex h-screen  bg-zinc-100  py-8 px-4 " >
+    <div className="flex h-screen  bg-zinc-100 py-8 px-4 " >
       {/* Sidebar */}
-      <div className="w-64 bg-blue-200 shadow-xl p-2 flex flex-col gap-3 rounded-xl overflow-hidden " >
+      <div className="w-64 bg-white shadow-xl p-2 flex flex-col gap-3 rounded-xl overflow-hidden " >
         
           <h2 className="flex justify-start items-center text-xl font-semibold gap-1 mx-3 pt-4">
             <img src="src\assets\logo1.jpg" alt="" style={{ height: "3.2rem" }} />{" "}
@@ -51,7 +51,7 @@ const Navbar = () => {
         
         <button onClick={()=>navigate('/')}> <SidebarLink icon={FiHome} label="Dashboard"  /></button>
         <SidebarLink icon={FiShoppingCart} label="Bookings" />
-        <SidebarLink icon={FiUser} label="Vendors" />
+        <SidebarLink icon={FiUser} label="Listings" />
         <SidebarLink icon={FiUser} label="Users" />
         <SidebarLink icon={FiBell} label="Notification" />
         <p className="mt-2 text-zinc-600 text-sm uppercase">Master Pages</p>

@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FiShoppingCart, FiUser, FiPackage, FiGrid } from "react-icons/fi";
+import axios from "axios";
+import { URL } from '../constants/api'
 
 const Card = ({ icon: Icon, title, count, color }) => (
   <div className={`p-5 rounded-lg text-white ${color}`}>
@@ -14,20 +16,58 @@ const Card = ({ icon: Icon, title, count, color }) => (
 );
 
 const DashboardCards = () => {
+  const [catnumb, setCatnumb] = useState(0);
+  const [subcatnumb, setSubCatnumb] = useState(0);
+  const [listingnumb,setListingNumb] = useState(0) ; 
+  const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState(false);
+  const [DisplayErr, setDisplayErr] = useState('');
+
+  useEffect(() => {
+    const FetchDashboardData = async () => {
+      try {
+        // const response = await axios.get(`${URL}/api_admin/get-category-count`) ; 
+        // setCatnumb(response.data.NumberofCategories) ;
+        // const subCatResp = await axios.get(`${URL}/api_admin/get-subcategory-count`) ; 
+        const [catResp,subCatResp,ListingResp] = await Promise.all([
+          axios.get(`${URL}/api_admin/get-category-count`),
+          axios.get(`${URL}/api_admin/get-subcategory-count`),
+          axios.get(`${URL}/api_admin/get-listing-count`)
+        ])
+        setCatnumb(catResp.data.NumberofCategories) ;
+        setSubCatnumb(subCatResp.data.NumberofSubCategories) ; 
+        setListingNumb(ListingResp.data.ListingNumber);
+
+        setLoading(false);
+      } catch (error) {
+        setErr(true);
+        setDisplayErr(error.message);
+        setLoading(false);
+      }
+    }
+
+    FetchDashboardData();
+  }, [])
+
+
+  if (loading) {
+    return (
+      <p>Loading your dashboard page </p>
+    )
+  }
+  if (err) {
+    return (
+      <p className="text-red-500"> we got an error while loading this page {DisplayErr}</p>
+    )
+  }
   return (
     <div className="bg-zinc-100 min-h-screen">
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2 mb-8 px-4 bg-zinc-100">
         <Card
           icon={FiShoppingCart}
-          title="Total Bookings"
-          count="0"
+          title="Total Listings"
+          count= {listingnumb}
           color="bg-yellow-400 text-black"
-        />
-        <Card
-          icon={FiUser}
-          title="Total Vendors"
-          count="34"
-          color="bg-blue-500"
         />
         <Card
           icon={FiUser}
@@ -35,16 +75,24 @@ const DashboardCards = () => {
           count="12"
           color="bg-blue-500"
         />
+
+        <Card
+          icon={FiUser}
+          title="Total Vendors"
+          count="34"
+          color="bg-blue-500"
+        />
+
         <Card
           icon={FiPackage}
           title="Total Categories"
-          count="9"
+          count={catnumb}
           color="bg-blue-500"
         />
         <Card
           icon={FiGrid}
           title="Total Sub Categories"
-          count="33"
+          count={subcatnumb}
           color="bg-blue-500"
         />
       </div>
