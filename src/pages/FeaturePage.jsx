@@ -7,6 +7,7 @@ import FeatureCard from '../components/FeatureCard'
 const FeaturePage = () => {
     const [features, setFeatures] = useState([]);
     const [error, setErrors] = useState(false);
+    const [reload, setReload] = useState(false) ; 
     const [loading, setLoading] = useState(true);
     const [DisplayError, SetDisplayError] = useState('');
 
@@ -27,7 +28,21 @@ const FeaturePage = () => {
         }
 
         FetchFeatureData() ; 
-    }, [])
+    }, [reload])
+
+     const DeleteFeature = async (id) => {
+        try {
+            const response = await axios.delete(`${URL}/api_admin/delete-feature/${id}`);
+            console.log(response.data);
+            setReload((prev) => !prev);
+            console.log('feature deleted');
+
+
+        } catch (error) {
+            console.log(`we got an error deleting the feature ${error}`);
+
+        }
+    }
 
     if (loading) {
         return(
@@ -48,9 +63,9 @@ const FeaturePage = () => {
                 <NavbarHorizontal></NavbarHorizontal>
                 <div className=' grid grid-cols-3'>
                     {
-                        features.AllFeatures.map((feature)=>{
+                        features.AllFeatures.map((feature,idx)=>{
                             return (
-                                <FeatureCard Name={feature.Name}></FeatureCard>
+                                <FeatureCard Name={feature.Name} key={idx} onDelete={DeleteFeature} DBid={feature._id}></FeatureCard>
                             )
                         })
                     }

@@ -30,7 +30,7 @@ const BannerCard = (props) => {
             </button>
             <button
               className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-              onClick={() => alert("Delete clicked")}
+              onClick={() => props.onDelete(props.DBid)}
             >
               <img src="src/assets/bin.gif" className="h-7 w-9" alt="Menu" />
               {/* <i className="ri-delete-bin-6-fill text-amber-900 text-2xl"></i> */}
