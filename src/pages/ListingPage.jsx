@@ -11,25 +11,25 @@ const ListingPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [reload, setReload] = useState(false);
-  const [categories, setCategories] = useState([]);
+  const [listings, setListing] = useState([]);
   const [DisplayError, SetDisplayError] = useState("");
 
-  const DeleteCategory = async (id) => {
+  const DeleteListing = async (id) => {
     try {
-      const response = await axios.delete(`${URL}/api_admin/delete-category/${id}`);
+      const response = await axios.delete(`${URL}/api_admin/delete-listing/${id}`);
       console.log(response.data);
       setReload((prev)=>!prev)
     } catch (error) {
-      console.log(`we got an error deleting the category ${error}`);
+      console.log(`we got an error deleting the listing ${error}`);
     }
 
   }
 
   useEffect(() => {
-    const FetchCategoryData = async () => {
+    const FetchListingData = async () => {
       try {
-        const response = await axios(`${URL}/api_app/get-category`);
-        setCategories(response.data);
+        const response = await axios(`${URL}/api_app/get-additional-details`);
+        setListing(response.data);
         setLoading(false);
 
         console.log(response.data);
@@ -40,7 +40,8 @@ const ListingPage = () => {
         console.log(err);
       }
     };
-    FetchCategoryData();
+
+    FetchListingData() ;
   }, [reload]);
 
   if (loading) {
@@ -62,15 +63,15 @@ const ListingPage = () => {
         <div className="bg-zinc-100 flex-1">
           <NavbarHorizontal />
           <div className="grid gap-2 grid-cols-3">
-            {categories.listings.map((category, idx) => {
+            {listings.AllAdditionalDetails.map((listing, idx) => {
               return (
                 <ListingCard
                   key={idx}
-                  Name={category.CategoryName}
-                  url={category.CategoryUrl}
-                 
-                  DBid={category._id}
-                  onDelete={DeleteCategory}
+                  Name={listing.Name}
+                  url={listing.ImageUrl}
+                  email={listing.Email}
+                  DBid={listing._id}
+                  onDelete = {DeleteListing}
                 ></ListingCard>
               );
             })}

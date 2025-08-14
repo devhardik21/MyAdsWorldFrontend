@@ -51,7 +51,7 @@ const Navbar = () => {
         
         <button onClick={()=>navigate('/')}> <SidebarLink icon={FiHome} label="Dashboard"  /></button>
         <SidebarLink icon={FiShoppingCart} label="Bookings" />
-        <SidebarLink icon={FiUser} label="Listings" />
+        <button onClick={()=>navigate('/listing')}><SidebarLink icon={FiUser} label="Listings" /> </button>
         <SidebarLink icon={FiUser} label="Users" />
         <SidebarLink icon={FiBell} label="Notification" />
         <p className="mt-2 text-zinc-600 text-sm uppercase">Master Pages</p>

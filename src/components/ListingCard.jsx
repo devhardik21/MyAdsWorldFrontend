@@ -17,9 +17,9 @@ const ListingCard = (props) => {
                         {props.Name}
                     </h3>
                     <div className="space-y-2">
-                        <div className="flex items-center text-sm text-gray-600 mb-3">  
+                        <div className="flex items-center text-xs text-gray-600 mb-3">  
                 
-                            <span className="font-medium mr-1">abc@gmail.com:</span>
+                            <span className="font-medium mr-1">{props.email}</span>
                             
                         </div>
                         <div className="flex items-center text-sm text-gray-600">
