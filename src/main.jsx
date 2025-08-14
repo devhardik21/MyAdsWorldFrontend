@@ -8,6 +8,7 @@ import { BannerPage } from './pages/BannerPage.jsx'
 import FeaturePage from './pages/FeaturePage.jsx'
 import Subcategory from './pages/Subcategory.jsx'
 import DashboardPage from './pages/DashboardPage.jsx'
+import MenuPage from './components/MenuPage.jsx'
 // import FeaturePage from './pages/FeaturePage.jsx'
 const routes = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ const routes = createBrowserRouter([
     path : '/features',
     element : <FeaturePage></FeaturePage>
   },
+  
  
 ])
 
