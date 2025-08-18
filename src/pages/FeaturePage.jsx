@@ -60,7 +60,7 @@ const FeaturePage = () => {
         <div className='bg-zinc-100 min-h-screen flex'>
             <Navbar></Navbar>
             <div>
-                <NavbarHorizontal></NavbarHorizontal>
+                <NavbarHorizontal name="Features"  btn="Add new Feature"></NavbarHorizontal>
                 <div className=' grid grid-cols-3'>
                     {
                         features.AllFeatures.map((feature,idx)=>{

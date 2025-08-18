@@ -65,7 +65,7 @@ export const BannerPage = () => {
         <div className=' bg-zinc-100 flex'>
             <Navbar></Navbar>
             <div className=''>
-                <NavbarHorizontal></NavbarHorizontal>
+                <NavbarHorizontal name="Banners" btn="Add new Banner"></NavbarHorizontal>
                 <div className='grid grid-cols-3 gap-2'>
                     {
                         banners.BannerDetails.map((banner, idx) => {

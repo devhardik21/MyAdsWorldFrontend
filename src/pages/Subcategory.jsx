@@ -56,7 +56,7 @@ const Subcategory = () => {
         <div className='flex'>
             <Navbar></Navbar>
             <div className='bg-zinc-100 flex-1'>
-                <NavbarHorizontal></NavbarHorizontal>
+                <NavbarHorizontal name="SubCategories" btn="Add new SubCategory"></NavbarHorizontal>
 
                 <div className='grid grid-cols-3'>
                     {

@@ -61,10 +61,10 @@ const CategoryPage = () => {
         <Navbar></Navbar>
 
         <div className="bg-zinc-100 flex-1">
-          <NavbarHorizontal onAddNew={()=>setCategoryAdd(true)}/>
+          <NavbarHorizontal onAddNew={()=>setCategoryAdd(true)} name="Categories" btn="Add new Category"/>
 
           {
-            categoryAdd ? <MenuPage></MenuPage> : null
+            categoryAdd ? <MenuPage onClose={()=>setCategoryAdd(false)}></MenuPage> : null
           }
 
           <div className="grid gap-2 grid-cols-3">

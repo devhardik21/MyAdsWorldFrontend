@@ -61,7 +61,7 @@ const ListingPage = () => {
         <Navbar></Navbar>
 
         <div className="bg-zinc-100 flex-1">
-          <NavbarHorizontal />
+          <NavbarHorizontal name="Listings"  btn={null}/>
           <div className="grid gap-2 grid-cols-3">
             {listings.AllAdditionalDetails.map((listing, idx) => {
               return (

@@ -22,7 +22,7 @@ import {
 //   </div>
 // );
 
-function NavbarHorizontal({onAddNew}) {
+function NavbarHorizontal({ onAddNew, name, btn }) {
   return (
     <>
       {/* Horizontal Bar */}
@@ -30,16 +30,17 @@ function NavbarHorizontal({onAddNew}) {
         <div className=" bg-white shadow-xl p-4 rounded-xl justify-between items-center flex ">
           <div>
             <p className="text-md text-muted  opacity-50 mb-1">
-              <span className="text-blue-700 opacity-50">Home</span> / Dashboard
+              <span className="text-blue-700 opacity-50">Home</span> /{name}
             </p>
-            <h2 className="ml-3 text-black text-xl font-medium">Categories</h2>
+            <h2 className="ml-3 text-black text-xl font-medium">{name}</h2>
           </div>
 
-          <button className="bg-yellow-400 text-blue-900 uppercase border-0 rounded-lg py-2 px-7 shadow-lg font-bold flex items-center justify-between gap-1"
-          onClick={()=>onAddNew()}>
+          {btn ?(<button className="bg-yellow-400 text-blue-900 uppercase border-0 rounded-lg py-2 px-7 shadow-lg font-bold flex items-center justify-between gap-1"
+            onClick={() => onAddNew()}>
             <i class="ri-add-circle-line" style={{ fontSize: "1.3rem" }}></i>{" "}
-            Add New Category
-          </button>
+            {btn}
+          </button>) : null
+          }
           {/* <HorizontalNavbar icon={FiHome} label="Dashboard" active /> */}
         </div>
       </div>
