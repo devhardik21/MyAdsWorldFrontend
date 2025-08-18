@@ -3,8 +3,6 @@ import React, { useState } from "react";
 const AddBanner = ({onClose}) => {
   const [formData, setFormData] = useState({
     name: "",
-    subTitle: "",
-    icon: null,
     image: null,
     category: "",
     sequence: "",

@@ -4,12 +4,14 @@ import NavbarHorizontal from '../components/NavbarHorizontal'
 import { URL } from '../constants/api'
 import axios from 'axios'
 import FeatureCard from '../components/FeatureCard'
+import AddFeature from '../components/AddFeature'
 const FeaturePage = () => {
     const [features, setFeatures] = useState([]);
     const [error, setErrors] = useState(false);
     const [reload, setReload] = useState(false) ; 
     const [loading, setLoading] = useState(true);
     const [DisplayError, SetDisplayError] = useState('');
+    const [addFeature , setAddFeature]= useState(false) ; 
 
     useEffect(() => {
         const FetchFeatureData = async () => {
@@ -60,7 +62,10 @@ const FeaturePage = () => {
         <div className='bg-zinc-100 min-h-screen flex'>
             <Navbar></Navbar>
             <div>
-                <NavbarHorizontal name="Features"  btn="Add new Feature"></NavbarHorizontal>
+                <NavbarHorizontal name="Features"  btn="Add new Feature" onAddNew={()=>{setAddFeature(true)}}></NavbarHorizontal>
+                {
+                    addFeature ? <AddFeature></AddFeature> : null
+                }
                 <div className=' grid grid-cols-3'>
                     {
                         features.AllFeatures.map((feature,idx)=>{
