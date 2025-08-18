@@ -9,6 +9,7 @@ import FeaturePage from './pages/FeaturePage.jsx'
 import Subcategory from './pages/Subcategory.jsx'
 import DashboardPage from './pages/DashboardPage.jsx'
 import { ListingPage } from './pages/ListingPage.jsx'
+import AddBanner from './components/AddBanner.jsx'
 // import FeaturePage from './pages/FeaturePage.jsx'
 const routes = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const routes = createBrowserRouter([
   {
     path : '/app',
     element : <App></App>
+  },
+  {
+    path : '/bannerr',
+    element : <AddBanner></AddBanner>
   }
   
  
