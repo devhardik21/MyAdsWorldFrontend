@@ -30,7 +30,7 @@ const MenuPage = ({onClose}) => {
 
   return (
     // 🔥 Fullscreen overlay
-    <div className="fixed inset-0 bg-black/50 bg-opacity-25 flex justify-center items-center z-50 ">
+    <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 ">
       {/* Modal box */}
       <div className="relative bg-white p-6 rounded-xl shadow-lg w-full max-w-lg h-[500px] overflow-y-auto">
         
