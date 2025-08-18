@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const MenuPage = ({onClose}) => {
+const MenuPage = ({ onClose }) => {
   const [formData, setFormData] = useState({
     name: "",
     subTitle: "",
@@ -33,10 +33,9 @@ const MenuPage = ({onClose}) => {
     <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 ">
       {/* Modal box */}
       <div className="relative bg-white p-6 rounded-xl shadow-lg w-full max-w-lg h-[500px] overflow-y-auto">
-        
         {/* Close button */}
         <button
-          onClick={()=>onClose()}
+          onClick={() => onClose()}
           className="absolute top-3 right-3 text-gray-600 hover:text-red-600 text-xl font-bold"
         >
           ×
@@ -76,6 +75,19 @@ const MenuPage = ({onClose}) => {
               required
             />
           </div>
+
+          {/* Icon Upload */}
+          <label className="block text-sm font-semibold text-blue-900 mb-1">
+            Icon
+          </label>
+          <input
+            type="file"
+            name="icon"
+            accept="image/*"
+            onChange={handleChange}
+            className="w-full mb-4 px-4 py-6 border rounded-md text-center cursor-pointer"
+          />
+          
 
           {/* Category Dropdown */}
           <div>
