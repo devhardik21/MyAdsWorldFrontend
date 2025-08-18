@@ -4,6 +4,7 @@ import { URL } from '../constants/api.js';
 import axios from 'axios';
 import { Navbar } from '../components/Navbar.jsx';
 import NavbarHorizontal from '../components/NavbarHorizontal.jsx';
+import AddBanner from '../components/AddBanner.jsx';
 
 export const BannerPage = () => {
     const [error, SetError] = useState(false);
@@ -11,6 +12,7 @@ export const BannerPage = () => {
     const [reload, setReload] = useState(false);
     const [loading, SetLoading] = useState(true);
     const [banners, SetBanners] = useState([]);
+    const [addBanner , SetAddBanner] = useState(false)
 
     const DeleteBanner = async (id) => {
         try {
@@ -65,7 +67,10 @@ export const BannerPage = () => {
         <div className=' bg-zinc-100 flex'>
             <Navbar></Navbar>
             <div className=''>
-                <NavbarHorizontal name="Banners" btn="Add new Banner"></NavbarHorizontal>
+                <NavbarHorizontal name="Banners" btn="Add new Banner" onAddNew={()=>SetAddBanner(true)}></NavbarHorizontal>
+                {
+                    addBanner? <AddBanner></AddBanner> : null
+                }
                 <div className='grid grid-cols-3 gap-2'>
                     {
                         banners.BannerDetails.map((banner, idx) => {
