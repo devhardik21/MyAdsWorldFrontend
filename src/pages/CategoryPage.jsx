@@ -5,6 +5,7 @@ import { URL } from "../constants/api";
 import { Card } from "../components/Card";
 import NavbarHorizontal from "../components/NavbarHorizontal";
 import { Navbar } from "../components/Navbar";
+import MenuPage from "../components/MenuPage";
 
 const CategoryPage = () => {
   const [loading, setLoading] = useState(true);
@@ -12,6 +13,7 @@ const CategoryPage = () => {
   const [reload, setReload] = useState(false);
   const [categories, setCategories] = useState([]);
   const [DisplayError, SetDisplayError] = useState("");
+  const [categoryAdd , setCategoryAdd] = useState(false) ; 
 
   const DeleteCategory = async (id) => {
     try {
@@ -59,10 +61,16 @@ const CategoryPage = () => {
         <Navbar></Navbar>
 
         <div className="bg-zinc-100 flex-1">
-          <NavbarHorizontal />
+          <NavbarHorizontal onAddNew={()=>setCategoryAdd(true)}/>
+
+          {
+            categoryAdd ? <MenuPage></MenuPage> : null
+          }
+
           <div className="grid gap-2 grid-cols-3">
             {categories.listings.map((category, idx) => {
               return (
+                
                 <Card
                   key={idx}
                   Name={category.CategoryName}

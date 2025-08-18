@@ -36,6 +36,10 @@ const routes = createBrowserRouter([
     path : '/listing',
     element : <ListingPage></ListingPage>
   },
+  {
+    path : '/app',
+    element : <App></App>
+  }
   
  
 ])

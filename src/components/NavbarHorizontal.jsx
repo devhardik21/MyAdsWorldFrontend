@@ -1,3 +1,5 @@
+//NavbarHorizontal.jsx
+
 import React from "react";
 import {
   FiHome,
@@ -20,7 +22,7 @@ import {
 //   </div>
 // );
 
-function NavbarHorizontal() {
+function NavbarHorizontal({onAddNew}) {
   return (
     <>
       {/* Horizontal Bar */}
@@ -33,7 +35,8 @@ function NavbarHorizontal() {
             <h2 className="ml-3 text-black text-xl font-medium">Categories</h2>
           </div>
 
-          <button className="bg-yellow-400 text-blue-900 uppercase border-0 rounded-lg py-2 px-7 shadow-lg font-bold flex items-center justify-between gap-1">
+          <button className="bg-yellow-400 text-blue-900 uppercase border-0 rounded-lg py-2 px-7 shadow-lg font-bold flex items-center justify-between gap-1"
+          onClick={()=>onAddNew()}>
             <i class="ri-add-circle-line" style={{ fontSize: "1.3rem" }}></i>{" "}
             Add New Category
           </button>

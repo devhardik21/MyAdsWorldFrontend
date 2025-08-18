@@ -10,8 +10,7 @@ function App() {
   return (
     <>
       {/* <FeaturePage></FeaturePage> */}
-      <DashboardPage/>
-    
+      <MenuPage></MenuPage>    
     </>
   );
 }
