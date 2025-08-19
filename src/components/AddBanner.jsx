@@ -27,7 +27,7 @@ const AddBanner = ({onClose}) => {
     <div className="inset-0 border-2 fixed z-50 bg-black/50 flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-xl shadow-md w-[80rem]  h-[22rem] mx-auto"
+        className="bg-white p-6 rounded-xl shadow-md w-[80rem]  h-[25rem] mx-auto"
       >
         <div className="flex justify-between items-center">
           <h2 className="text-2xl font-bold text-blue-900 mb-4">Banner</h2>
@@ -83,7 +83,7 @@ const AddBanner = ({onClose}) => {
             </select>
           </div>
         </div>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center py-7">
           <div>
             <button
               type="submit"
