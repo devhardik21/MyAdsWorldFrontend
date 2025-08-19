@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
-const MenuPage = ({ onClose }) => {
-
-  
+const NewSubCatAddPage = ({ onClose }) => {
   const [formData, setFormData] = useState({
     name: "",
     subTitle: "",
@@ -48,7 +46,27 @@ const MenuPage = ({ onClose }) => {
         <form onSubmit={handleSubmit} className="space-y-3">
           <div className="grid grid-cols-2 gap-4 py-2">
             {/* Category Dropdown */}
-            
+            <div>
+              <label className="block text-sm font-semibold text-blue-900 mb-1">
+                Category<span className="text-red-500">*</span>
+              </label>
+              <select
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-2 border rounded-md"
+              >
+                <option value="" disabled>
+                  Select Category
+                </option>
+                {categories.map((cat, idx) => (
+                  <option key={idx} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
+            </div>
             {/* Name */}
             <div>
               <label className="block text-sm font-semibold text-blue-900 mb-1">
@@ -139,4 +157,4 @@ const MenuPage = ({ onClose }) => {
   );
 };
 
-export default MenuPage;
+export default NewSubCatAddPage;

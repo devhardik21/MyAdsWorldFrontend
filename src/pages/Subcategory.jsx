@@ -5,7 +5,7 @@ import axios from 'axios';
 import NavbarHorizontal from '../components/NavbarHorizontal'
 import { Card } from '../components/Card';
 import { URL } from '../constants/api';
-import AddSubCatPage from '../components/AddSubCat';
+import NewSubCatAddPage from '../components/NewAddSubCat';
 const Subcategory = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -60,7 +60,7 @@ const Subcategory = () => {
             <div className='bg-zinc-100 flex-1'>
                 <NavbarHorizontal name="SubCategories" btn="Add new SubCategory" onAddNew={()=>setshowAddCat(true)}></NavbarHorizontal>
                 {
-                    showAddCat?<AddSubCatPage onClose={()=>setshowAddCat(false)}></AddSubCatPage> : null
+                    showAddCat?<NewSubCatAddPage onClose={()=>setshowAddCat(false)}></NewSubCatAddPage> : null
                 }
                 <div className='grid grid-cols-3'>
                     {
