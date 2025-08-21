@@ -66,7 +66,7 @@ const Subcategory = () => {
                     {
                         subcategories.AllSubCategory.map((subcategory, idx) => {
                             return (
-                                <Card key={idx} url={subcategory.SubCategoryIcon} Name={subcategory.SubCategoryName} NumberofCompanies={4} NumberofSub={2} DBid={subcategory._id} onDelete={DeleteSubCat}>
+                                <Card key={idx} url={subcategory.SubCategoryUrl} Name={subcategory.SubCategoryName} NumberofCompanies={4} NumberofSub={2} DBid={subcategory._id} onDelete={DeleteSubCat}>
 
                                 </Card>
                             )

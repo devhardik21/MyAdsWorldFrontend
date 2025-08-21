@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const FeatureCard = (props) => {
   const [showMenu, setShowMenu] = useState(false);
   return (
-    <div className="bg-blue-200 h-24 flex justify-between max-w-xs rounded-2xl shadow-xl shadow-zinc-200 hover:shadow-2xl m-4">
+    <div className="bg-blue-200 h-24 flex justify-between max-w-xs rounded-2xl shadow-xl shadow-zinc-200 hover:shadow-2xl m-4" onClick={props.onClick}>
       <div className="text-2xl flex items-center mx-4 p-5">{props.Name}</div>
 
       <div className="flex flex-col justify-between items-end p-1 relative">
