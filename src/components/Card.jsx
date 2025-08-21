@@ -43,6 +43,7 @@ function Card(props) {
         <button
           className="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200"
           aria-label="Edit"
+          
         >
           <svg
             className="w-5 h-5"

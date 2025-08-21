@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FiShoppingCart, FiUser, FiPackage, FiGrid } from "react-icons/fi";
 import axios from "axios";
-import { URL } from '../constants/api'
+import { URL } from "../constants/api";
 
 const Card = ({ icon: Icon, title, count, color }) => (
   <div className={`p-5 rounded-lg text-white ${color}`}>
@@ -18,24 +18,24 @@ const Card = ({ icon: Icon, title, count, color }) => (
 const DashboardCards = () => {
   const [catnumb, setCatnumb] = useState(0);
   const [subcatnumb, setSubCatnumb] = useState(0);
-  const [listingnumb,setListingNumb] = useState(0) ; 
+  const [listingnumb, setListingNumb] = useState(0);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(false);
-  const [DisplayErr, setDisplayErr] = useState('');
+  const [DisplayErr, setDisplayErr] = useState("");
 
   useEffect(() => {
     const FetchDashboardData = async () => {
       try {
-        // const response = await axios.get(`${URL}/api_admin/get-category-count`) ; 
+        // const response = await axios.get(`${URL}/api_admin/get-category-count`) ;
         // setCatnumb(response.data.NumberofCategories) ;
-        // const subCatResp = await axios.get(`${URL}/api_admin/get-subcategory-count`) ; 
-        const [catResp,subCatResp,ListingResp] = await Promise.all([
+        // const subCatResp = await axios.get(`${URL}/api_admin/get-subcategory-count`) ;
+        const [catResp, subCatResp, ListingResp] = await Promise.all([
           axios.get(`${URL}/api_admin/get-category-count`),
           axios.get(`${URL}/api_admin/get-subcategory-count`),
-          axios.get(`${URL}/api_admin/get-listing-count`)
-        ])
-        setCatnumb(catResp.data.NumberofCategories) ;
-        setSubCatnumb(subCatResp.data.NumberofSubCategories) ; 
+          axios.get(`${URL}/api_admin/get-listing-count`),
+        ]);
+        setCatnumb(catResp.data.NumberofCategories);
+        setSubCatnumb(subCatResp.data.NumberofSubCategories);
         setListingNumb(ListingResp.data.ListingNumber);
 
         setLoading(false);
@@ -44,21 +44,26 @@ const DashboardCards = () => {
         setDisplayErr(error.message);
         setLoading(false);
       }
-    }
+    };
 
     FetchDashboardData();
-  }, [])
-
+  }, []);
 
   if (loading) {
+    // return <h2> Your Categories are loading</h2>;
     return (
-      <p>Loading your dashboard page </p>
-    )
+      <div className="flex items-center justify-center h-screen">
+        <div className="loader  w-[50px] p-[8px]"></div>
+      </div>
+    );
   }
   if (err) {
     return (
-      <p className="text-red-500"> we got an error while loading this page {DisplayErr}</p>
-    )
+      <p className="text-red-500">
+        {" "}
+        we got an error while loading this page {DisplayErr}
+      </p>
+    );
   }
   return (
     <div className="bg-zinc-100 min-h-screen">
@@ -66,7 +71,7 @@ const DashboardCards = () => {
         <Card
           icon={FiShoppingCart}
           title="Total Listings"
-          count= {listingnumb}
+          count={listingnumb}
           color="bg-yellow-400 text-black"
         />
         <Card

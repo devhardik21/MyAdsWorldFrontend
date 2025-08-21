@@ -4,12 +4,13 @@ import DashboardCards from "../components/DashboardCards";
 import { Navbar } from "../components/Navbar";
 
 const DashboardPage = () => {
+  
   return (
     <>
       <div className="flex">
         <Navbar />
         <div className="flex-1">
-          <NavbarHorizontal current="Categories" name="Dashboard" btn={null}/>
+          <NavbarHorizontal current="Categories" name="Dashboard" btn={null} />
           <DashboardCards />
         </div>
       </div>

@@ -1,58 +1,63 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
-import { Navbar } from '../components/Navbar'
-import axios from 'axios';
-import NavbarHorizontal from '../components/NavbarHorizontal'
-import { Card } from '../components/Card';
-import { URL } from '../constants/api';
-import NewSubCatAddPage from '../components/NewAddSubCat';
+import React from "react";
+import { useState, useEffect } from "react";
+import { Navbar } from "../components/Navbar";
+import axios from "axios";
+import NavbarHorizontal from "../components/NavbarHorizontal";
+import { Card } from "../components/Card";
+import { URL } from "../constants/api";
+import NewSubCatAddPage from "../components/NewAddSubCat";
 const Subcategory = () => {
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
-    const [reload, setReload] = useState(false);
-    const [subcategories, setSubCategories] = useState([]);
-    const [DisplayError, SetDisplayError] = useState("");
-    const [showAddCat ,setshowAddCat] = useState(false);
-    useEffect(() => {
-        const FetchSubCategoryData = async () => {
-            try {
-                const response = await axios.get(`${URL}/api_app/get-subcategory`);
-                setSubCategories(response.data);
-                setLoading(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [reload, setReload] = useState(false);
+  const [subcategories, setSubCategories] = useState([]);
+  const [DisplayError, SetDisplayError] = useState("");
+  const [showAddCat, setshowAddCat] = useState(false);
+  useEffect(() => {
+    const FetchSubCategoryData = async () => {
+      try {
+        const response = await axios.get(`${URL}/api_app/get-subcategory`);
+        setSubCategories(response.data);
+        setLoading(false);
 
-                console.log(response.data);
-            } catch (err) {
-                setError(true);
-                setLoading(false);
-                SetDisplayError(err.message);
-                console.log(err);
-            }
-        };
-        FetchSubCategoryData();
-    }, [reload]);
+        console.log(response.data);
+      } catch (err) {
+        setError(true);
+        setLoading(false);
+        SetDisplayError(err.message);
+        console.log(err);
+      }
+    };
+    FetchSubCategoryData();
+  }, [reload]);
 
-    const DeleteSubCat = async (id) => {
-        try {
-            const response = await axios.delete(`${URL}/api_admin/delete-subcategory/${id}`);
-            console.log(response.data);
-            setReload((prev)=>!prev);
-        } catch (error) {
-            console.log(`we got an error deleting the sub category ${error}`);
-
-        }
+  const DeleteSubCat = async (id) => {
+    try {
+      const response = await axios.delete(
+        `${URL}/api_admin/delete-subcategory/${id}`
+      );
+      console.log(response.data);
+      setReload((prev) => !prev);
+    } catch (error) {
+      console.log(`we got an error deleting the sub category ${error}`);
     }
-    if (loading) {
-        return <h2> Your Sub Categories are loading</h2>;
-    }
+  };
+  if (loading) {
+    // return <h2> Your Sub Categories are loading</h2>;
+    return (
+      <div className="flex items-center justify-center h-screen ">
+        <div className="loader  w-[50px] p-[8px]"></div>
+      </div>
+    );
+  }
 
-    if (error) {
-        return (
-            <p className="text-red-600">
-                We got error while loading the sub category ie {DisplayError}
-            </p>
-        );
-    }
-
+  if (error) {
+    return (
+      <p className="text-red-600">
+        We got error while loading the sub category ie {DisplayError}
+      </p>
+    );
+  }
 
     return (
         <div className='flex'>

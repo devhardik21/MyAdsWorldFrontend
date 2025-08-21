@@ -86,7 +86,7 @@ const AdditionalFeatureDetails = ({ onClose, DBid,onCreate }) => {
             console.log("12345");
             console.log(response.data);
             console.log(response.data.message);
-            onCreate()
+            onCreate() ;
             onClose();
         } catch (error) {
             console.log("we got an error making the put request", error.message);

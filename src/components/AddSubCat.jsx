@@ -31,7 +31,7 @@ const AddSubCatPage = ({onClose}) => {
     return (
         <div className="inset-0 border-2 fixed z-50 bg-black/50 flex items-center justify-center">
 
-            <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow-md w-full max-w-lg mx-auto h-[90vh] overflow-y-auto scrollbar-hide">
+            <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow-md w-full max-w-lg mx-auto h-[90vh] h-max-auto overflow-y-auto scrollbar-hide">
                 <div className="flex justify-between items-center">
                 <h2 className="text-2xl font-bold text-blue-900 mb-4">Sub-Category</h2>
                 <button

@@ -15,15 +15,15 @@ const MenuPage = ({ onClose,onCreate }) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value 
+      [name]: value,
     });
-    
+
     console.log(formData);
   };
 
   const handleImageChange = (e) => {
-      setImg(e.target.files[0])
-  }
+    setImg(e.target.files[0]);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,7 +41,7 @@ const MenuPage = ({ onClose,onCreate }) => {
       onCreate() ;
       onClose(); // close modal after success
     } catch (error) {
-      console.error("Error creating category:", error);      
+      console.error("Error creating category:", error);
     }
   };
 
@@ -79,7 +79,9 @@ const MenuPage = ({ onClose,onCreate }) => {
 
           {/* Icon Upload */}
           <div>
-            <label className="block text-sm font-semibold text-blue-900">Icon</label>
+            <label className="block text-sm font-semibold text-blue-900">
+              Icon
+            </label>
             <input
               type="file"
               name="myimg"
@@ -92,7 +94,9 @@ const MenuPage = ({ onClose,onCreate }) => {
           <div className="grid grid-cols-2 gap-4">
             {/* Sequence */}
             <div>
-              <label className="block text-sm font-semibold text-blue-900 mb-1">Sequence</label>
+              <label className="block text-sm font-semibold text-blue-900 mb-1">
+                Sequence
+              </label>
               <input
                 type="number"
                 name="CatSequence"
@@ -105,7 +109,9 @@ const MenuPage = ({ onClose,onCreate }) => {
 
             {/* Status */}
             <div>
-              <label className="block text-sm font-semibold text-blue-900 mb-1">Status</label>
+              <label className="block text-sm font-semibold text-blue-900 mb-1">
+                Status
+              </label>
               <select
                 name="isActive"
                 value={formData.isActive}

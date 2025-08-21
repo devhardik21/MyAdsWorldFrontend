@@ -7,25 +7,23 @@ const AddFeature = ({ onClose,onCreate}) => {
   const [formData, setFormData] = useState({
     Name: "",
     isActive: "true",
-    sequence: ""
-
+    sequence: "",
   });
-
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
   const handleTypeChange = (e) => {
-    setTypeofFeature(e.target.value)
-  }
+    setTypeofFeature(e.target.value);
+  };
   const handleSubmit = async (e) => {
-
     e.preventDefault();
-  
 
-    const response = await axios.post(`${URL}/api_admin/create-feature`, {...formData,TypeofFeature})
+    const response = await axios.post(`${URL}/api_admin/create-feature`, {
+      ...formData,
+      TypeofFeature,
+    });
     console.log(response.data.message);
     onClose() ;
     onCreate() ;
@@ -35,7 +33,7 @@ const AddFeature = ({ onClose,onCreate}) => {
     <div className="flex justify-center items-center inset-0 fixed bg-black/50 z-10">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-xl shadow-md w-[80rem]  h-[23rem]   mx-auto"
+        className="bg-white p-6 rounded-xl shadow-md w-[80rem] h-[23rem]  mx-auto"
       >
         <div className="flex justify-between items-center">
           <h2 className="text-2xl font-bold text-blue-900 mb-4">Features</h2>
@@ -62,9 +60,9 @@ const AddFeature = ({ onClose,onCreate}) => {
               <option value="" disabled>
                 Select Type
               </option>
-              <option value="CategoryListing"  >Category</option>
-              <option value="SubCategory"  >SubCategory</option>
-              <option value="Listing"  >Listing</option>
+              <option value="CategoryListing">Category</option>
+              <option value="SubCategory">SubCategory</option>
+              <option value="Listing">Listing</option>
             </select>
           </div>
 

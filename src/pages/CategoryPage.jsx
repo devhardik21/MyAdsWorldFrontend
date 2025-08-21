@@ -13,18 +13,19 @@ const CategoryPage = () => {
   const [reload, setReload] = useState(false);
   const [categories, setCategories] = useState([]);
   const [DisplayError, SetDisplayError] = useState("");
-  const [categoryAdd , setCategoryAdd] = useState(false) ; 
+  const [categoryAdd, setCategoryAdd] = useState(false);
 
   const DeleteCategory = async (id) => {
     try {
-      const response = await axios.delete(`${URL}/api_admin/delete-category/${id}`);
+      const response = await axios.delete(
+        `${URL}/api_admin/delete-category/${id}`
+      );
       console.log(response.data);
-      setReload((prev)=>!prev)
+      setReload((prev) => !prev);
     } catch (error) {
       console.log(`we got an error deleting the category ${error}`);
     }
-
-  }
+  };
 
   useEffect(() => {
     const FetchCategoryData = async () => {
@@ -45,7 +46,12 @@ const CategoryPage = () => {
   }, [reload]);
 
   if (loading) {
-    return <h2> Your Categories are loading</h2>;
+    // return <h2> Your Categories are loading</h2>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="loader  w-[50px] p-[8px]"></div>
+      </div>
+    );
   }
 
   if (error) {
@@ -70,7 +76,6 @@ const CategoryPage = () => {
           <div className="grid gap-2 grid-cols-3">
             {categories.listings.map((category, idx) => {
               return (
-                
                 <Card
                   key={idx}
                   Name={category.CategoryName}
