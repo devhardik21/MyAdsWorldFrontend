@@ -60,7 +60,7 @@ const Subcategory = () => {
             <div className='bg-zinc-100 flex-1'>
                 <NavbarHorizontal name="SubCategories" btn="Add new SubCategory" onAddNew={()=>setshowAddCat(true)}></NavbarHorizontal>
                 {
-                    showAddCat?<NewSubCatAddPage onClose={()=>setshowAddCat(false)}></NewSubCatAddPage> : null
+                    showAddCat?<NewSubCatAddPage onClose={()=>setshowAddCat(false)}  onCreate={()=>setReload((prev)=>!prev)}></NewSubCatAddPage> : null
                 }
                 <div className='grid grid-cols-3'>
                     {

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { LocalURL, URL } from "../constants/api";
 // { SubCategoryName, CategoryName, SubCatSequence, isActive }
-const NewSubCatAddPage = ({ onClose }) => {
+const NewSubCatAddPage = ({ onClose ,onCreate}) => {
   const [img, setImg] = useState(null);
   const [CategoryName, setCategoryName] = useState(null);
   const [CatList, setCatList] = useState({});
@@ -49,7 +49,8 @@ const NewSubCatAddPage = ({ onClose }) => {
       data.append("CategoryName", CategoryName);
       data.append("myimg", img);
       const response = await axios.post(`${URL}/api_admin/add-subcategory`, data);
-
+      onClose() ;
+      onCreate()
       console.log(response.data.message);
 
 

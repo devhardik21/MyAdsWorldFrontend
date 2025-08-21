@@ -64,7 +64,7 @@ const CategoryPage = () => {
           <NavbarHorizontal onAddNew={()=>setCategoryAdd(true)} name="Categories" btn="Add new Category"/>
 
           {
-            categoryAdd ? <MenuPage onClose={()=>setCategoryAdd(false)}></MenuPage> : null
+            categoryAdd ? <MenuPage onClose={()=>setCategoryAdd(false)} onCreate={()=>setReload((prev)=>!prev)}></MenuPage> : null
           }
 
           <div className="grid gap-2 grid-cols-3">

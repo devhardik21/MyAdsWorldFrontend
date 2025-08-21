@@ -3,7 +3,7 @@ import axios from "axios";
 import { URL } from "../constants/api.js";
 import { LocalURL } from "../constants/api.js";
 
-const MenuPage = ({ onClose }) => {
+const MenuPage = ({ onClose,onCreate }) => {
   const [img, setImg] = useState(null);
   const [formData, setFormData] = useState({
     CategoryName: "",
@@ -38,7 +38,7 @@ const MenuPage = ({ onClose }) => {
       const response = await axios.post(`${URL}/api_admin/add-category`, data);
       console.log("Category created:", response.data);
       console.log(response.message);
-      
+      onCreate() ;
       onClose(); // close modal after success
     } catch (error) {
       console.error("Error creating category:", error);      

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { URL } from "../constants/api";
 
-const AdditionalFeatureDetails = ({ onClose, DBid }) => {
+const AdditionalFeatureDetails = ({ onClose, DBid,onCreate }) => {
 
     const [options, setOptions] = useState([]);
     const [formData, setFormData] = useState({});
@@ -86,6 +86,7 @@ const AdditionalFeatureDetails = ({ onClose, DBid }) => {
             console.log("12345");
             console.log(response.data);
             console.log(response.data.message);
+            onCreate()
             onClose();
         } catch (error) {
             console.log("we got an error making the put request", error.message);
