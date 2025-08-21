@@ -68,11 +68,11 @@ const FeaturePage = () => {
             <div>
                 <NavbarHorizontal name="Features" btn="Add new Feature" onAddNew={() => { setAddFeature(true) }}></NavbarHorizontal>
                 {
-                    addFeature ? <AddFeature onClose={() => setAddFeature(false)}></AddFeature> : null
+                    addFeature ? <AddFeature onClose={() => setAddFeature(false)} onCreate={()=>setReload((prev)=>!prev)}></AddFeature> : null
                      
                 }
                 {
-                    additionalDetofFeature ? <AdditionalFeatureDetails onClose={()=>SetadditionalDetofFeature(false)} DBid={IdofFeature}></AdditionalFeatureDetails> : null
+                    additionalDetofFeature ? <AdditionalFeatureDetails onClose={()=>SetadditionalDetofFeature(false)} DBid={IdofFeature}  onCreate={()=>setReload((prev)=>!prev)}></AdditionalFeatureDetails> : null
                 }
                 <div className=' grid grid-cols-3'>
                     {

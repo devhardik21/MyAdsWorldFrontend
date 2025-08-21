@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { LocalURL, URL } from "../constants/api";
 // {Name,Description,TypeofFeature} 
-const AddFeature = ({ onClose }) => {
+const AddFeature = ({ onClose,onCreate}) => {
   const [TypeofFeature, setTypeofFeature] = useState("");
   const [formData, setFormData] = useState({
     Name: "",
@@ -27,6 +27,8 @@ const AddFeature = ({ onClose }) => {
 
     const response = await axios.post(`${URL}/api_admin/create-feature`, {...formData,TypeofFeature})
     console.log(response.data.message);
+    onClose() ;
+    onCreate() ;
   };
 
   return (
