@@ -5,6 +5,7 @@ import { URL } from "../constants/api";
 import axios from "axios";
 import FeatureCard from "../components/FeatureCard";
 import AddFeature from "../components/AddFeature";
+import AdditionalFeatureDetails from "../components/AdditionalDetFeature";
 const FeaturePage = () => {
   const [features, setFeatures] = useState([]);
   const [error, setErrors] = useState(false);
@@ -12,6 +13,8 @@ const FeaturePage = () => {
   const [loading, setLoading] = useState(true);
   const [DisplayError, SetDisplayError] = useState("");
   const [addFeature, setAddFeature] = useState(false);
+  const [additionalDetofFeature, SetadditionalDetofFeature] = useState(false);
+  const [IdofFeature, setIdofFeature] = useState("");
 
   useEffect(() => {
     const FetchFeatureData = async () => {
@@ -44,10 +47,8 @@ const FeaturePage = () => {
   };
 
   if (loading) {
-    // return(
-    //     <p>Your feature section is loading</p>
-    // )
     return (
+      // <p>Your feature section is loading</p>
       <div className="flex items-center justify-center h-screen">
         <div className="loader  w-[50px] p-[8px]"></div>
       </div>
@@ -69,7 +70,15 @@ const FeaturePage = () => {
             setAddFeature(true);
           }}
         ></NavbarHorizontal>
-        {addFeature ? <AddFeature></AddFeature> : null}
+        {addFeature ? (
+          <AddFeature onClose={() => setAddFeature(false)}></AddFeature>
+        ) : null}
+        {additionalDetofFeature ? (
+          <AdditionalFeatureDetails
+            onClose={() => SetadditionalDetofFeature(false)}
+            DBid={IdofFeature}
+          ></AdditionalFeatureDetails>
+        ) : null}
         <div className=" grid grid-cols-3">
           {features.AllFeatures.map((feature, idx) => {
             return (
@@ -78,6 +87,10 @@ const FeaturePage = () => {
                 key={idx}
                 onDelete={DeleteFeature}
                 DBid={feature._id}
+                onClick={() => {
+                  SetadditionalDetofFeature(true);
+                  setIdofFeature(feature._id);
+                }}
               ></FeatureCard>
             );
           })}

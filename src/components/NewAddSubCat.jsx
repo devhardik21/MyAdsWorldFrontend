@@ -1,30 +1,62 @@
-import React, { useState } from "react";
-
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { LocalURL, URL } from "../constants/api";
+// { SubCategoryName, CategoryName, SubCatSequence, isActive }
 const NewSubCatAddPage = ({ onClose }) => {
+  const [img, setImg] = useState(null);
+  const [CategoryName, setCategoryName] = useState(null);
+  const [CatList, setCatList] = useState({});
   const [formData, setFormData] = useState({
-    name: "",
-    subTitle: "",
-    icon: null,
-    image: null,
-    category: "",
-    sequence: "",
-    status: "active",
+    SubCategoryName: "",
+    SubCatSequence: "",
+    isActive: "true",
   });
 
-  const categories = ["Plumbing", "Cleaning", "Electrician", "Painter"];
+  useEffect(() => {
+    const FetchCategories  = async ()=> {
+        try {
+            const response = await axios(`${URL}/api_app/get-category`) ;
+            setCatList(response.data) ;
+        } catch (error) {
+          console.log("failed to make the data of category");  
+        }
+    }
+
+    FetchCategories() ; 
+  }, [])
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (files) {
-      setFormData({ ...formData, [name]: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+    const { name, value } = e.target;
+
+    setFormData({ ...formData, [name]: value });
+
   };
 
-  const handleSubmit = (e) => {
+  const handleCategoryChange = (e) => {
+    setCategoryName(e.target.value);
+  }
+  const handleImageChange = (e) => {
+    setImg(e.target.files[0]);
+
+  }
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    try {
+      const data = new FormData();
+      data.append("SubCategoryName", formData.SubCategoryName);
+      data.append("SubCatSequence", formData.SubCatSequence);
+      data.append("isActive", formData.isActive);
+      data.append("CategoryName", CategoryName);
+      data.append("myimg", img);
+      const response = await axios.post(`${URL}/api_admin/add-subcategory`, data);
+
+      console.log(response.data.message);
+
+
+    } catch (error) {
+      console.log("there was an error fetching the api ");
+
+    }
     onClose(); // close modal after submit if you want
   };
 
@@ -52,17 +84,17 @@ const NewSubCatAddPage = ({ onClose }) => {
               </label>
               <select
                 name="category"
-                value={formData.category}
-                onChange={handleChange}
+                value={CategoryName}
+                onChange={handleCategoryChange}
                 required
                 className="w-full px-4 py-2 border rounded-md"
               >
                 <option value="" disabled>
                   Select Category
                 </option>
-                {categories.map((cat, idx) => (
-                  <option key={idx} value={cat}>
-                    {cat}
+                {CatList.listings?.map((cat, idx) => (
+                  <option key={idx} value={cat.CategoryName}>
+                    {cat.CategoryName}
                   </option>
                 ))}
               </select>
@@ -74,9 +106,9 @@ const NewSubCatAddPage = ({ onClose }) => {
               </label>
               <input
                 type="text"
-                name="name"
+                name="SubCategoryName"
                 placeholder="Name"
-                value={formData.name}
+                value={formData.SubCategoryName}
                 onChange={handleChange}
                 className="w-full px-4 py-2 border rounded-md outline-none"
                 required
@@ -93,7 +125,7 @@ const NewSubCatAddPage = ({ onClose }) => {
               type="file"
               name="icon"
               accept="image/*"
-              onChange={handleChange}
+              onChange={handleImageChange}
               className="w-full mb-4 px-4 py-6 border rounded-md text-center cursor-pointer"
             />
           </div>
@@ -106,9 +138,9 @@ const NewSubCatAddPage = ({ onClose }) => {
               </label>
               <input
                 type="number"
-                name="sequence"
+                name="SubCatSequence"
                 placeholder="Sequence"
-                value={formData.sequence}
+                value={formData.SubCatSequence}
                 onChange={handleChange}
                 className="w-full mb-4 px-4 py-2 border rounded-md outline-none"
               />
@@ -119,38 +151,38 @@ const NewSubCatAddPage = ({ onClose }) => {
                 Status
               </label>
               <select
-                name="status"
-                value={formData.status}
+                name=""
+                value={formData.isActive}
                 onChange={handleChange}
                 className="w-full px-4 py-2 border rounded-md"
               >
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
               </select>
             </div>
           </div>
 
-          
-            <div className="flex items-center justify-between p-8">
-              <div>
-                {/* Cancel */}
-                <button
-                  type="Cancel"
-                  className="bg-yellow-500 text-white font-semibold px-6 py-2 rounded-md hover:bg-yellow-500 "
-                >
-                  Cancel
-                </button>
-              </div>
-              <div>
-                <button
-                  type="submit"
-                  className="bg-blue-900 text-white font-semibold px-6 py-2 rounded-md hover:bg-blue-800 "
-                >
-                  Submit
-                </button>
-              </div>
+
+          <div className="flex items-center justify-between p-8">
+            <div>
+              {/* Cancel */}
+              <button
+                type="Cancel"
+                className="bg-yellow-500 text-white font-semibold px-6 py-2 rounded-md hover:bg-yellow-500 "
+              >
+                Cancel
+              </button>
             </div>
-          
+            <div>
+              <button
+                type="submit"
+                className="bg-blue-900 text-white font-semibold px-6 py-2 rounded-md hover:bg-blue-800 "
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+
         </form>
       </div>
     </div>

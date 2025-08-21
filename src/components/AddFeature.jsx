@@ -1,37 +1,37 @@
+import axios from "axios";
 import React, { useState } from "react";
-
+import { LocalURL, URL } from "../constants/api";
+// {Name,Description,TypeofFeature}
 const AddFeature = ({ onClose }) => {
+  const [TypeofFeature, setTypeofFeature] = useState("");
   const [formData, setFormData] = useState({
-    name: "",
-    subTitle: "",
-    icon: null,
-    image: null,
-    category: "",
+    Name: "",
+    isActive: "true",
     sequence: "",
-    status: "active",
   });
 
-  const categories = ["Category", "Sub-Category"];
-
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (files) {
-      setFormData({ ...formData, [name]: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
-
-  const handleSubmit = (e) => {
+  const handleTypeChange = (e) => {
+    setTypeofFeature(e.target.value);
+  };
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+
+    const response = await axios.post(`${URL}/api_admin/create-feature`, {
+      ...formData,
+      TypeofFeature,
+    });
+    console.log(response.data.message);
   };
 
   return (
     <div className="flex justify-center items-center inset-0 fixed bg-black/50 z-10">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-xl shadow-md w-[80rem]  h-[23rem]   mx-auto"
+        className="bg-white p-6 rounded-xl shadow-md w-[80rem] h-[23rem]  mx-auto"
       >
         <div className="flex justify-between items-center">
           <h2 className="text-2xl font-bold text-blue-900 mb-4">Features</h2>
@@ -46,23 +46,21 @@ const AddFeature = ({ onClose }) => {
           {/* Category Dropdown */}
           <div>
             <label className="block text-sm font-semibold text-blue-900 mb-1">
-              Sequence<span className="text-red-500">*</span>
+              Type<span className="text-red-500">*</span>
             </label>
             <select
               name="category"
-              value={formData.category}
-              onChange={handleChange}
+              value={TypeofFeature}
+              onChange={handleTypeChange}
               required
               className="w-full px-4 py-2 border rounded-md"
             >
               <option value="" disabled>
-                Select Sequence
+                Select Type
               </option>
-              {categories.map((cat, idx) => (
-                <option key={idx} value={cat}>
-                  {cat}
-                </option>
-              ))}
+              <option value="CategoryListing">Category</option>
+              <option value="SubCategory">SubCategory</option>
+              <option value="Listing">Listing</option>
             </select>
           </div>
 
@@ -73,9 +71,9 @@ const AddFeature = ({ onClose }) => {
             </label>
             <input
               type="text"
-              name="name"
+              name="Name"
               placeholder="Name"
-              value={formData.name}
+              value={formData.Name}
               onChange={handleChange}
               className="w-full mb-4 px-4 py-2 border rounded-md outline-none"
               required
@@ -104,13 +102,13 @@ const AddFeature = ({ onClose }) => {
               Status
             </label>
             <select
-              name="status"
-              value={formData.status}
+              name="isActive"
+              value={formData.isActive}
               onChange={handleChange}
               className="w-full mb-6 px-4 py-2 border rounded-md"
             >
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
+              <option value="true">Active</option>
+              <option value="false">Inactive</option>
             </select>
           </div>
         </div>
@@ -118,7 +116,7 @@ const AddFeature = ({ onClose }) => {
         <div className="flex justify-between items-center py-7">
           <div>
             <button
-              type="Cancel"
+              onClick={onClose}
               className="bg-yellow-500 text-white font-semibold px-6 py-2 rounded-md hover:bg-yellow-500"
             >
               Cancel

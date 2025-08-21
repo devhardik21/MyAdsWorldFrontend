@@ -78,7 +78,7 @@ const Subcategory = () => {
             return (
               <Card
                 key={idx}
-                url={subcategory.SubCategoryIcon}
+                url={subcategory.SubCategoryUrl}
                 Name={subcategory.SubCategoryName}
                 NumberofCompanies={4}
                 NumberofSub={2}
@@ -92,5 +92,4 @@ const Subcategory = () => {
     </div>
   );
 };
-
 export default Subcategory;

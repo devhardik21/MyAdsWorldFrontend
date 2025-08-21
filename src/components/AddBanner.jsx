@@ -1,77 +1,124 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { URL } from "../constants/api";
 
 const AddBanner = ({ onClose }) => {
+  const [bannerType, setBannerType] = useState(""); 
+  const [img, setImg] = useState(null);
+
   const [formData, setFormData] = useState({
-    name: "",
-    image: null,
-    category: "",
+    BannerName: "",
     sequence: "",
-    status: "active",
+    isActive: "true",
+    BannerTypeDetails: ""
   });
 
-  const [options, setOptions] = useState({
-    category: ["Plumbing", "Cleaning", "Electrician", "Painter"],
-    subCategory: ["Bathroom", "Kitchen", "Office", "Home"],
-    vendor: ["Vendor A", "Vendor B", "Vendor C"],
-  });
+  const [options, setOptions] = useState([]); 
+  const [selectedOption, setSelectedOption] = useState(""); 
+  const [loadingOptions, setLoadingOptions] = useState(false); 
 
-  const [selectedOptions, setSelectedOptions] = useState([]);
-  const [previewUrl, setPreviewUrl] = useState(null);
-
+  // ✅ for handling text/number/select changes (BannerName, sequence, status)
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (files && files[0]) {
-      const file = files[0];
-      setFormData({ ...formData, [name]: file });
-      setPreviewUrl(URL.createObjectURL(file)); // create image preview URL
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-    if (name === "type") {
-      setSelectedOptions([]); // Reset when changing type
+  // ✅ image upload change
+  const handleFileChange = (e) => {
+    setImg(e.target.files[0]);
+  };
+
+  // ✅ handle type dropdown change → fetch related data
+  const handleBannerChange = async (e) => {
+    const selected = e.target.value;
+    setBannerType(selected);
+    setSelectedOption(""); // reset previously selected option
+    setOptions([]);
+    if (!selected) return;
+
+    try {
+      setLoadingOptions(true); 
+      let res;
+      if (selected === "CategoryListing") {
+        res = await axios.get(`${URL}/api_app/get-category`);
+        setOptions(res.data.listings); 
+      } else if (selected === "SubCategory") {
+        res = await axios.get(`${URL}/api_app/get-subcategory`);
+        setOptions(res.data.AllSubCategory); 
+      } else if (selected === "Listing") {
+        res = await axios.get(`${URL}/api_app/get-additional-details`);
+        setOptions(res.data.AllAdditionalDetails); 
+      }
+      console.log(res.data);
+    } catch (err) {
+      console.error("Error fetching options:", err);
+    } finally {
+      setLoadingOptions(false); 
     }
   };
 
-  const handleCheckboxChange = (option) => {
-    setSelectedOptions((prev) =>
-      prev.includes(option)
-        ? prev.filter((item) => item !== option)
-        : [...prev, option]
-    );
+  // ✅ helper to get the correct label (this is what we save as BannerTypeDetails)
+  const getOptionLabel = (option) => {
+    if (bannerType === "CategoryListing") return option.CategoryName;
+    if (bannerType === "SubCategory") return option.SubCategoryName;
+    if (bannerType === "Listing") return option.Name;
+    return "";
   };
 
-  const handleSubmit = (e) => {
+  // ✅ single selection → set label (name) as selectedOption
+  const handleOptionChange = (label) => {
+    setSelectedOption(label);
+  };
+
+  // ✅ submit form
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", { ...formData, selectedOptions });
+
+    try {
+      const data = new FormData();
+      data.append("BannerName", formData.BannerName);
+      data.append("sequence", formData.sequence);
+      data.append("isActive", formData.isActive);
+      data.append("BannerType", bannerType);
+      data.append("BannerTypeDetails", selectedOption); // ✅ save label instead of id
+      if (img) data.append("myimg", img);
+
+      const res = await axios.post(`${URL}/api_admin/add-banners`, data);
+      console.log("Banner added:", res.data);
+      onClose();
+    } catch (err) {
+      console.error("Error saving banner:", err);
+    }
   };
 
   return (
     <div className="inset-0 border-2 fixed z-50 bg-black/50 flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-xl shadow-md w-[80rem] h-min-[35rem] h-max-auto mx-auto"
+        className="bg-white p-6 rounded-xl shadow-md w-[60rem] h-min-[35rem] mx-auto"
       >
+        {/* Header */}
         <div className="flex justify-between items-center">
           <h2 className="text-2xl font-bold text-blue-900 mb-4">Banner</h2>
           <button
-            onClick={() => onClose()}
-            className=" text-gray-600 hover:text-red-600 text-xl font-bold mb-4 "
+            type="button"
+            onClick={onClose}
+            className="text-gray-600 hover:text-red-600 text-xl font-bold mb-4"
           >
             ×
           </button>
         </div>
 
-        {/* Name */}
-        <div>
+        {/* Banner Name */}
+        <div className="pb-3">
           <label className="block text-sm font-semibold text-blue-900 mb-1">
             Name<span className="text-red-500">*</span>
           </label>
           <input
             type="text"
-            name="name"
+            name="BannerName"
             placeholder="Name"
-            value={formData.name}
+            value={formData.BannerName}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-md outline-none"
             required
@@ -84,68 +131,87 @@ const AddBanner = ({ onClose }) => {
             Type
           </label>
           <select
-            name="type"
-            value={formData.type}
-            onChange={handleChange}
+            name="bannerType"
+            value={bannerType}
+            onChange={handleBannerChange}
             className="w-full mb-6 px-4 py-2 border rounded-md"
             required
           >
             <option value="">Select Type</option>
-            <option value="category">Category</option>
-            <option value="subCategory">Sub-Category</option>
-            <option value="vendor">Vendor</option>
+            <option value="CategoryListing">Category</option>
+            <option value="SubCategory">Sub-Category</option>
+            <option value="Listing">Listings</option>
           </select>
         </div>
 
-        {/* Show checkboxes based on type */}
-        {formData.type && (
-          <div className="mb-4">
-            <label className="block text-sm font-semibold text-blue-900 mb-2">
-              Select {formData.type} Options
-            </label>
-            <div className="grid grid-cols-10 gap-3">
-              {options[formData.type].map((option, idx) => (
-                <label key={idx} className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={selectedOptions.includes(option)}
-                    onChange={() => handleCheckboxChange(option)}
-                  />
-                  {option}
-                </label>
-              ))}
-            </div>
+        {/* Dynamic options (radio for single select) */}
+        {loadingOptions ? (
+          <div className="flex items-center gap-2 text-gray-600 mb-4">
+            <svg
+              className="animate-spin h-5 w-5 text-blue-900"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+              ></path>
+            </svg>
+            Loading {bannerType} options...
           </div>
+        ) : (
+          options.length > 0 && (
+            <div className="mb-4">
+              <label className="block text-sm font-semibold text-blue-900 mb-2">
+                Select {bannerType} Option
+              </label>
+              <div className="grid grid-cols-7 gap-3 max-h-40 overflow-y-auto p-3 rounded">
+                {options.map((option, idx) => {
+                  const label = getOptionLabel(option);
+                  return (
+                    <label key={option._id || idx} className="flex items-center gap-2">
+                      <input
+                        type="radio" // ✅ single selection
+                        name="singleOption"
+                        checked={selectedOption === label} // ✅ compare with label
+                        onChange={() => handleOptionChange(label)} // ✅ save label
+                      />
+                      {label}
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
+          )
         )}
 
-        {/* Image Upload with Preview inside the container */}
+        {/* Image Upload */}
         <div>
           <label className="block text-sm font-semibold text-blue-900 mb-1">
             Image
           </label>
-          <div className="w-full mb-4 px-4 py-6 border rounded-md text-center cursor-pointer relative">
-            {previewUrl ? (
-              <img
-                src={previewUrl}
-                alt="Preview"
-                className="max-h-40 mx-auto rounded-md"
-              />
-            ) : (
-              <span className="text-gray-500">Click to upload image</span>
-            )}
-            <input
-              type="file"
-              name="image"
-              accept="image/*"
-              onChange={handleChange}
-              className="absolute inset-0 opacity-0 cursor-pointer"
-            />
-          </div>
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleFileChange}
+            className="w-full mb-4 px-4 py-6 border rounded-md text-center cursor-pointer"
+          />
         </div>
 
+        {/* Sequence + Status */}
         <div className="grid grid-cols-2 gap-4">
           <div>
-            {/* Sequence */}
             <label className="block text-sm font-semibold text-blue-900 mb-1">
               Sequence
             </label>
@@ -159,40 +225,36 @@ const AddBanner = ({ onClose }) => {
             />
           </div>
           <div>
-            {/* Status Dropdown */}
             <label className="block text-sm font-semibold text-blue-900 mb-1">
               Status
             </label>
             <select
-              name="status"
-              value={formData.status}
+              name="isActive"
+              value={formData.isActive}
               onChange={handleChange}
               className="w-full mb-6 px-4 py-2 border rounded-md"
             >
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
+              <option value="true">Active</option>
+              <option value="false">Inactive</option>
             </select>
           </div>
         </div>
 
+        {/* Buttons */}
         <div className="flex justify-between items-center py-7">
-          <div>
-            <button
-              type="button"
-              onClick={onClose}
-              className="bg-yellow-500 text-white font-semibold px-6 py-2 rounded-md hover:bg-yellow-600"
-            >
-              Cancel
-            </button>
-          </div>
-          <div>
-            <button
-              type="submit"
-              className="bg-blue-900 text-white font-semibold px-6 py-2 rounded-md hover:bg-blue-800"
-            >
-              Save Changes
-            </button>
-          </div>
+          <button
+            type="button"
+            className="bg-yellow-500 text-white font-semibold px-6 py-2 rounded-md hover:bg-yellow-600"
+            onClick={onClose}
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="bg-blue-900 text-white font-semibold px-6 py-2 rounded-md hover:bg-blue-800"
+          >
+            Save Changes
+          </button>
         </div>
       </form>
     </div>

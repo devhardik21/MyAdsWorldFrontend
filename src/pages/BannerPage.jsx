@@ -67,30 +67,24 @@ export const BannerPage = () => {
     );
   }
 
-  return (
-    <div className=" bg-zinc-100 flex">
-      <Navbar></Navbar>
-      <div className="">
-        <NavbarHorizontal
-          name="Banners"
-          btn="Add new Banner"
-          onAddNew={() => SetAddBanner(true)}
-        ></NavbarHorizontal>
-        {addBanner ? <AddBanner></AddBanner> : null}
-        <div className="grid grid-cols-3 gap-2">
-          {banners.BannerDetails.map((banner, idx) => {
-            return (
-              <BannerCard
-                url={banner.BannerUrl}
-                BannerName={banner.BannerName}
-                key={idx}
-                DBid={banner._id}
-                onDelete={DeleteBanner}
-              ></BannerCard>
-            );
-          })}
+    return (
+        <div className=' bg-zinc-100 flex'>
+            <Navbar></Navbar>
+            <div className=''>
+                <NavbarHorizontal name="Banners" btn="Add new Banner" onAddNew={()=>SetAddBanner(true)}></NavbarHorizontal>
+                {
+                    addBanner? <AddBanner onClose={()=>SetAddBanner(false)}></AddBanner> : null
+                }
+                <div className='grid grid-cols-3 gap-2'>
+                    {
+                        banners.BannerDetails.map((banner, idx) => {
+                            return <BannerCard url={banner.BannerUrl} BannerName={banner.BannerName} key={idx} DBid={banner._id} onDelete = {DeleteBanner}></BannerCard>
+                        })
+                    }
+                </div>
+
+            </div>
         </div>
-      </div>
-    </div>
-  );
-};
+    )
+
+}
