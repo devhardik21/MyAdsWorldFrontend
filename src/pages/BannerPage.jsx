@@ -73,7 +73,7 @@ export const BannerPage = () => {
             <div className=''>
                 <NavbarHorizontal name="Banners" btn="Add new Banner" onAddNew={()=>SetAddBanner(true)}></NavbarHorizontal>
                 {
-                    addBanner? <AddBanner onClose={()=>SetAddBanner(false)}></AddBanner> : null
+                    addBanner? <AddBanner onClose={()=>SetAddBanner(false)} onCreate={()=>setReload((prev)=>!prev)}></AddBanner> : null
                 }
                 <div className='grid grid-cols-3 gap-2'>
                     {

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { URL } from "../constants/api";
 
-const AddBanner = ({ onClose }) => {
+const AddBanner = ({ onClose ,onCreate}) => {
   const [bannerType, setBannerType] = useState(""); 
   const [img, setImg] = useState(null);
 
@@ -17,18 +17,17 @@ const AddBanner = ({ onClose }) => {
   const [selectedOption, setSelectedOption] = useState(""); 
   const [loadingOptions, setLoadingOptions] = useState(false); 
 
-  // ✅ for handling text/number/select changes (BannerName, sequence, status)
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // ✅ image upload change
+
   const handleFileChange = (e) => {
     setImg(e.target.files[0]);
   };
 
-  // ✅ handle type dropdown change → fetch related data
   const handleBannerChange = async (e) => {
     const selected = e.target.value;
     setBannerType(selected);
@@ -86,6 +85,7 @@ const AddBanner = ({ onClose }) => {
       const res = await axios.post(`${URL}/api_admin/add-banners`, data);
       console.log("Banner added:", res.data);
       onClose();
+      onCreate() ;
     } catch (err) {
       console.error("Error saving banner:", err);
     }

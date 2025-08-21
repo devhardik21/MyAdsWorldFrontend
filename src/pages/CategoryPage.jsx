@@ -67,15 +67,11 @@ const CategoryPage = () => {
         <Navbar></Navbar>
 
         <div className="bg-zinc-100 flex-1">
-          <NavbarHorizontal
-            onAddNew={() => setCategoryAdd(true)}
-            name="Categories"
-            btn="Add new Category"
-          />
+          <NavbarHorizontal onAddNew={()=>setCategoryAdd(true)} name="Categories" btn="Add new Category"/>
 
-          {categoryAdd ? (
-            <MenuPage onClose={() => setCategoryAdd(false)}></MenuPage>
-          ) : null}
+          {
+            categoryAdd ? <MenuPage onClose={()=>setCategoryAdd(false)} onCreate={()=>setReload((prev)=>!prev)}></MenuPage> : null
+          }
 
           <div className="grid gap-2 grid-cols-3">
             {categories.listings.map((category, idx) => {

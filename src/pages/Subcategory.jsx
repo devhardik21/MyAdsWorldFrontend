@@ -59,37 +59,31 @@ const Subcategory = () => {
     );
   }
 
-  return (
-    <div className="flex">
-      <Navbar></Navbar>
-      <div className="bg-zinc-100 flex-1">
-        <NavbarHorizontal
-          name="SubCategories"
-          btn="Add new SubCategory"
-          onAddNew={() => setshowAddCat(true)}
-        ></NavbarHorizontal>
-        {showAddCat ? (
-          <NewSubCatAddPage
-            onClose={() => setshowAddCat(false)}
-          ></NewSubCatAddPage>
-        ) : null}
-        <div className="grid grid-cols-3">
-          {subcategories.AllSubCategory.map((subcategory, idx) => {
-            return (
-              <Card
-                key={idx}
-                url={subcategory.SubCategoryUrl}
-                Name={subcategory.SubCategoryName}
-                NumberofCompanies={4}
-                NumberofSub={2}
-                DBid={subcategory._id}
-                onDelete={DeleteSubCat}
-              ></Card>
-            );
-          })}
+    return (
+        <div className='flex'>
+            <Navbar></Navbar>
+            <div className='bg-zinc-100 flex-1'>
+                <NavbarHorizontal name="SubCategories" btn="Add new SubCategory" onAddNew={()=>setshowAddCat(true)}></NavbarHorizontal>
+                {
+                    showAddCat?<NewSubCatAddPage onClose={()=>setshowAddCat(false)}  onCreate={()=>setReload((prev)=>!prev)}></NewSubCatAddPage> : null
+                }
+                <div className='grid grid-cols-3'>
+                    {
+                        subcategories.AllSubCategory.map((subcategory, idx) => {
+                            return (
+                                <Card key={idx} url={subcategory.SubCategoryUrl} Name={subcategory.SubCategoryName} NumberofCompanies={4} NumberofSub={2} DBid={subcategory._id} onDelete={DeleteSubCat}>
+
+                                </Card>
+                            )
+                        })
+                    }
+                </div>
+
+
+            </div>
         </div>
-      </div>
-    </div>
-  );
-};
-export default Subcategory;
+
+    )
+}
+
+export default Subcategory
