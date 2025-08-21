@@ -9,7 +9,7 @@ const DashboardPage = () => {
       <div className="flex">
         <Navbar />
         <div className="flex-1">
-          <NavbarHorizontal current="Categories" name="Dashboard" btn={null}/>
+          <NavbarHorizontal current="Categories" name="Dashboard" btn={null} />
           <DashboardCards />
         </div>
       </div>

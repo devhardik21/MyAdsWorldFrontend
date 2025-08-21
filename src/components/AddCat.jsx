@@ -1,24 +1,28 @@
 import React, { useState } from "react";
 
 const MenuPage = ({ onClose }) => {
-
-  
   const [formData, setFormData] = useState({
     name: "",
-    subTitle: "",
     icon: null,
-    image: null,
-    category: "",
     sequence: "",
     status: "active",
   });
 
-  const categories = ["Plumbing", "Cleaning", "Electrician", "Painter"];
+  const [preview, setPreview] = useState({
+    icon: null,
+  });
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (files) {
-      setFormData({ ...formData, [name]: files[0] });
+      const file = files[0];
+      setFormData({ ...formData, [name]: file });
+
+      // Preview file
+      setPreview((prev) => ({
+        ...prev,
+        [name]: URL.createObjectURL(file),
+      }));
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -34,7 +38,7 @@ const MenuPage = ({ onClose }) => {
     //  Fullscreen overlay
     <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 border-2">
       {/* Modal box */}
-      <div className="relative bg-white p-6  rounded-xl shadow-lg w-[80rem]  h-[32rem] overflow-y-auto">
+      <div className="relative bg-white p-6 rounded-xl shadow-lg w-[80rem] h-min-[32rem] h-max-auto overflow-y-auto">
         {/* Close button */}
         <button
           onClick={() => onClose()}
@@ -47,8 +51,6 @@ const MenuPage = ({ onClose }) => {
 
         <form onSubmit={handleSubmit} className="space-y-3">
           <div className="grid grid-cols-2 gap-4 py-2">
-            {/* Category Dropdown */}
-            
             {/* Name */}
             <div>
               <label className="block text-sm font-semibold text-blue-900 mb-1">
@@ -68,21 +70,32 @@ const MenuPage = ({ onClose }) => {
 
           {/* Icon Upload */}
           <div>
-            <label className="block text-sm font-semibold text-blue-900 ">
+            <label className="block text-sm font-semibold text-blue-900 mb-1">
               Icon
             </label>
-            <input
-              type="file"
-              name="icon"
-              accept="image/*"
-              onChange={handleChange}
-              className="w-full mb-4 px-4 py-6 border rounded-md text-center cursor-pointer"
-            />
+            <div className="w-full mb-4 px-4 py-6 border rounded-md text-center cursor-pointer relative">
+              <input
+                type="file"
+                name="icon"
+                accept="image/*"
+                onChange={handleChange}
+                className="absolute inset-0 opacity-0 cursor-pointer"
+              />
+              {preview.icon ? (
+                <img
+                  src={preview.icon}
+                  alt="icon preview"
+                  className="mx-auto max-h-24 object-contain"
+                />
+              ) : (
+                <span className="text-gray-400">Click to upload Icon</span>
+              )}
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
+            {/* Sequence */}
             <div>
-              {/* Sequence */}
               <label className="block text-sm font-semibold text-blue-900 mb-1">
                 Sequence
               </label>
@@ -95,6 +108,7 @@ const MenuPage = ({ onClose }) => {
                 className="w-full mb-4 px-4 py-2 border rounded-md outline-none"
               />
             </div>
+
             {/* Status */}
             <div>
               <label className="block text-sm font-semibold text-blue-900 mb-1">
@@ -112,27 +126,26 @@ const MenuPage = ({ onClose }) => {
             </div>
           </div>
 
-          
-            <div className="flex items-center justify-between p-8">
-              <div>
-                {/* Cancel */}
-                <button
-                  type="Cancel"
-                  className="bg-yellow-500 text-white font-semibold px-6 py-2 rounded-md hover:bg-yellow-500 "
-                >
-                  Cancel
-                </button>
-              </div>
-              <div>
-                <button
-                  type="submit"
-                  className="bg-blue-900 text-white font-semibold px-6 py-2 rounded-md hover:bg-blue-800 "
-                >
-                  Submit
-                </button>
-              </div>
+          <div className="flex items-center justify-between p-8">
+            <div>
+              {/* Cancel */}
+              <button
+                type="button"
+                onClick={onClose}
+                className="bg-yellow-500 text-white font-semibold px-6 py-2 rounded-md hover:bg-yellow-600"
+              >
+                Cancel
+              </button>
             </div>
-          
+            <div>
+              <button
+                type="submit"
+                className="bg-blue-900 text-white font-semibold px-6 py-2 rounded-md hover:bg-blue-800"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     </div>

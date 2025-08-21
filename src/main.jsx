@@ -11,6 +11,8 @@ import DashboardPage from './pages/DashboardPage.jsx'
 import { ListingPage } from './pages/ListingPage.jsx'
 import AddBanner from './components/AddBanner.jsx'
 // import FeaturePage from './pages/FeaturePage.jsx'
+import EditPage from './pages/EditPage.jsx'
+import LoadingPage from './pages/LoadingPage.jsx'
 const routes = createBrowserRouter([
   {
     path : '/',
@@ -41,9 +43,11 @@ const routes = createBrowserRouter([
     element : <App></App>
   },
   {
-    path : '/bannerr',
-    element : <AddBanner></AddBanner>
-  }
+    path : '/Load',
+    element : <LoadingPage></LoadingPage>
+  },
+ 
+  
   
  
 ])
