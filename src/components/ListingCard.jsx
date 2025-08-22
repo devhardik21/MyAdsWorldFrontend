@@ -1,8 +1,22 @@
 import React from 'react'
-
+import { useNavigate } from 'react-router-dom';
 const ListingCard = (props) => {
-  return (
-     <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-5 mx-3 h-50 my-2">
+    const navigate = useNavigate();
+    const HandleEditClickFn = () => {
+
+        if (props.type == "category") {
+            navigate(`/edit-cat/${props.DBid}`)
+        }
+        if (props.type == "subcategory") {
+            navigate(`/edit-subcat/${props.DBid}`)
+        }
+        if (props.type == "listing") {
+            navigate(`/edit-listing/${props.DBid}`)
+        }
+    }
+
+    return (
+        <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-5 mx-3 h-50 my-2">
 
             <div className="flex items-start gap-4 mb-6">
                 <div className="flex-shrink-0">
@@ -17,15 +31,15 @@ const ListingCard = (props) => {
                         {props.Name}
                     </h3>
                     <div className="space-y-2">
-                        <div className="flex items-center text-xs text-gray-600 mb-3">  
-                
+                        <div className="flex items-center text-xs text-gray-600 mb-3">
+
                             <span className="font-medium mr-1">{props.email}</span>
-                            
+
                         </div>
                         <div className="flex items-center text-sm text-gray-600">
-                    
+
                             <span className="font-medium mr-1">Java Developer</span>
-    
+
                         </div>
                     </div>
                 </div>
@@ -35,7 +49,7 @@ const ListingCard = (props) => {
             <div className="flex justify-end gap-2 pt-4 border-t border-gray-100">
                 <button
                     className="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200"
-                    aria-label="Edit"
+                    aria-label="Edit" onClick={HandleEditClickFn }
                 >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -51,7 +65,7 @@ const ListingCard = (props) => {
                 </button>
             </div>
         </div>
-  )
+    )
 }
 
 export default ListingCard

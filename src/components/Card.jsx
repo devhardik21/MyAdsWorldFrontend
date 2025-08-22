@@ -1,6 +1,23 @@
 // category card
 
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 function Card(props) {
+  // const [DBid, SetDBid] = useState("") ;
+  // SetDBid(props.DBid) ;
+const navigate = useNavigate() ; 
+  const HandleEditClickFn = () => {
+    
+    if (props.type=="category") {
+       navigate(`/edit-cat/${props.DBid}`)
+    }
+    if (props.type=="subcategory") {
+         navigate(`/edit-subcat/${props.DBid}`)
+    }
+    if (props.type=="listing") {
+         navigate(`/edit-listing/${props.DBid}`)
+    }
+  }
   return (
     <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-5 mx-3 h-50 my-2">
       <div className="flex items-start gap-4 mb-6">
@@ -42,7 +59,7 @@ function Card(props) {
         </div> */}
         <button
           className="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200"
-          aria-label="Edit"
+          aria-label="Edit"  onClick={HandleEditClickFn}
           
         >
           <svg

@@ -1,7 +1,11 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 const BannerCard = (props) => {
+  const navigate = useNavigate() ;
   const [showMenu, setShowMenu] = useState(false);
+  const HandleEditClickFn = () => {
+    navigate(`/edit-banner/${props.DBid}`)
+  }
 
   return (
     <div className="flex bg-white p-1.5 rounded-2xl shadow-2xl shadow-gray-300 hover:shadow-gray-400 transition-shadow duration-200 mx-3 my-2 h-[15rem] w-[22rem]">
@@ -22,7 +26,7 @@ const BannerCard = (props) => {
           <div className="absolute top-10 left-0.5  bg-white shadow-lg rounded-md w-14 border border-gray-200">
             <button
               className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-              onClick={() => alert("Edit clicked")}
+              onClick={HandleEditClickFn}
             >
               <img src="src/assets/edit.gif" className="h-7 w-9" alt="Menu" />
 
