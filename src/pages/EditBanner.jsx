@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import NavbarHorizontal from "../components/NavbarHorizontal";
 import { Navbar } from "../components/Navbar";
-import { URL } from "../constants/api";
+import { LocalURL, URL as API_URL } from "../constants/api";
 
 const EditBanner = () => {
   const { id } = useParams();
@@ -12,10 +12,12 @@ const EditBanner = () => {
   // form states
   const [formData, setFormData] = useState({
     BannerName: "",
-    BannerCategory: "",
+    BannerType: "",
     sequence: "",
     isActive: true,
   });
+
+
 
   // image state
   const [bannerImage, setBannerImage] = useState(null);
@@ -25,15 +27,16 @@ const EditBanner = () => {
   useEffect(() => {
     const fetchBanner = async () => {
       try {
-        const res = await axios.get(`${URL}/api_admin/get-banner/${id}`);
+        const res = await axios.get(`${API_URL}/api_admin/get-banner/${id}`);
         const data = res.data.BannerbyID;
 
         setFormData({
           BannerName: data.BannerName || "",
-          BannerCategory: data.BannerCategory || "",
+          BannerType: data.BannerType || "",
           sequence: data.sequence || "",
           isActive: data.isActive ?? true,
         });
+
         setPreviewUrl(data.BannerUrl || "");
       } catch (error) {
         console.error("Error fetching banner:", error);
@@ -75,16 +78,15 @@ const EditBanner = () => {
     try {
       const updateData = new FormData();
       updateData.append("BannerName", formData.BannerName);
-      updateData.append("BannerCategory", formData.BannerCategory);
+      updateData.append("BannerType", formData.BannerType);
       updateData.append("sequence", formData.sequence);
       updateData.append("isActive", formData.isActive);
       if (bannerImage) updateData.append("BannerUrl", bannerImage);
 
-      await axios.put(`${URL}/banner/${id}`, updateData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await axios.put(`${API_URL}/api_admin/update-banner/${id}`, updateData)
 
-      navigate("/banners"); // go back after update
+      alert("successful")
+      navigate("/banner"); // go back after update
     } catch (error) {
       console.error("Error updating banner:", error);
     }
@@ -118,15 +120,47 @@ const EditBanner = () => {
 
             {/* Banner Category */}
             <div>
-              <label className="block text-gray-700">Banner Category</label>
-              <input
-                type="text"
-                name="BannerCategory"
-                value={formData.BannerCategory}
-                onChange={handleChange}
-                className="mt-1 block w-full border rounded-lg p-2"
-              />
+              <label className="block text-gray-700 mb-2">Banner Type</label>
+
+              <div className="flex flex-col gap-2">
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="BannerType"
+                    value="CategoryListing"
+                    checked={formData.BannerType === "CategoryListing"}
+                    onChange={handleChange}
+                    className="mr-2"
+                  />
+                  Categories
+                </label>
+
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="BannerType"
+                    value="SubCategory"
+                    checked={formData.BannerType === "SubCategory"}
+                    onChange={handleChange}
+                    className="mr-2"
+                  />
+                  Sub Category
+                </label>
+
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="BannerType"
+                    value="Listing"
+                    checked={formData.BannerType === "Listing"}
+                    onChange={handleChange}
+                    className="mr-2"
+                  />
+                  Listing
+                </label>
+              </div>
             </div>
+
 
             {/* Sequence */}
             <div>

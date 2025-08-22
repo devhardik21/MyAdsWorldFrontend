@@ -21,7 +21,7 @@ const FeatureCard = (props) => {
             setShowMenu((prev) => !prev);
           }}
         >
-          <img src="src/assets/menu.png" className="h-7 w-7" alt="Menu" />
+          <img src="/menu.png" className="h-7 w-7" alt="Menu" />
         </div>
 
         {/* Dropdown */}
@@ -38,7 +38,7 @@ const FeatureCard = (props) => {
                 setShowMenu(false); // close menu after action
               }}
             >
-              <img src="src/assets/edit.gif" className="h-7 w-9" alt="Edit" />
+              <img src="/edit.gif" className="h-7 w-9" alt="Edit" />
             </button>
 
             {/* Delete */}
@@ -49,7 +49,7 @@ const FeatureCard = (props) => {
                 setShowMenu(false); // close menu after action
               }}
             >
-              <img src="src/assets/bin.gif" className="h-7 w-9" alt="Delete" />
+              <img src="/bin.gif" className="h-7 w-9" alt="Delete" />
             </button>
           </div>
         )}

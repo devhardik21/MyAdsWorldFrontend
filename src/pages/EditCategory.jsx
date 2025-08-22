@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Navbar } from "../components/Navbar";
 import NavbarHorizontal from "../components/NavbarHorizontal";
-import { URL } from "../constants/api";
+import { LocalURL, URL as API_URL } from "../constants/api";
 
 const EditCategory = () => {
   const { id } = useParams();
@@ -31,7 +31,7 @@ const EditCategory = () => {
   useEffect(() => {
     const fetchCategory = async () => {
       try {
-        const res = await axios.get(`${URL}/api_admin/get-category/${id}`);
+        const res = await axios.get(`${API_URL}/api_admin/get-category/${id}`);
         const data = res.data.Cat;
 
         console.log(data);
@@ -100,9 +100,7 @@ const EditCategory = () => {
       if (categoryUrlFile) form.append("CategoryUrl", categoryUrlFile);
       if (categoryIconFile) form.append("CategoryIcon", categoryIconFile);
 
-      await axios.put(`http://localhost:5000/api/categories/${id}`, form, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await axios.put(`${API_URL}/api_admin/update-category/${id}`, form);
 
       alert("Category updated successfully!");
       navigate("/category");

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import { URL } from "../constants/api";
+import { LocalURL, URL as API_URL } from "../constants/api";
 import NavbarHorizontal from "../components/NavbarHorizontal";
 import { Navbar } from "../components/Navbar";
 
@@ -27,7 +27,7 @@ const EditSubCategory = () => {
   useEffect(() => {
     const fetchSubCategory = async () => {
       try {
-        const res = await axios.get(`${URL}/api_admin/get-subcategory/${id}`);
+        const res = await axios.get(`${API_URL}/api_admin/get-subcategory/${id}`);
         const data = res.data.SubCat;
 
         setFormData({
@@ -93,9 +93,7 @@ const EditSubCategory = () => {
       if (subCatUrlFile) form.append("SubCategoryUrl", subCatUrlFile);
       if (subCatIconFile) form.append("SubCategoryIcon", subCatIconFile);
 
-      await axios.put(`${URL}/api_admin/update-subcategory/${id}`, form, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await axios.put(`${API_URL}/api_admin/update-subcategory/${id}`, form);
 
       alert("SubCategory updated successfully!");
       navigate("/subcategory");
