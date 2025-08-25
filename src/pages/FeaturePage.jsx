@@ -62,7 +62,7 @@ const FeaturePage = () => {
   return (
     <div className="bg-zinc-100 min-h-screen flex">
       <Navbar></Navbar>
-      <div>
+      <div className="flex-1">
         <NavbarHorizontal
           name="Features"
           btn="Add new Feature"

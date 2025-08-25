@@ -70,7 +70,7 @@ export const BannerPage = () => {
     return (
         <div className=' bg-zinc-100 flex'>
             <Navbar></Navbar>
-            <div className=''>
+            <div className='flex-1'>
                 <NavbarHorizontal name="Banners" btn="Add new Banner" onAddNew={()=>SetAddBanner(true)}></NavbarHorizontal>
                 {
                     addBanner? <AddBanner onClose={()=>SetAddBanner(false)} onCreate={()=>setReload((prev)=>!prev)}></AddBanner> : null
