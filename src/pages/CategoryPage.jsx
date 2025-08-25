@@ -65,7 +65,7 @@ const CategoryPage = () => {
     <>
       <div className="flex ">
         <Navbar></Navbar>
-
+      
         <div className="bg-zinc-100 flex-1">
           <NavbarHorizontal onAddNew={()=>setCategoryAdd(true)} name="Categories" btn="Add new Category"/>
 
@@ -84,6 +84,7 @@ const CategoryPage = () => {
                   NumberofSub="5"
                   DBid={category._id}
                   onDelete={DeleteCategory}
+                  type="category"
                 ></Card>
               );
             })}

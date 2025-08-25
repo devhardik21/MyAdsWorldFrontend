@@ -1,7 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const BannerCard = (props) => {
+  const navigate = useNavigate() ;
   const [showMenu, setShowMenu] = useState(false);
+  const HandleEditClickFn = () => {
+    navigate(`/edit-banner/${props.DBid}`)
+  }
 
   return (
     <div className="flex bg-white p-1.5 rounded-2xl shadow-2xl shadow-gray-300 hover:shadow-gray-400 transition-shadow duration-200 mx-3 my-2 h-[15rem] w-[22rem]">
@@ -15,16 +20,16 @@ const BannerCard = (props) => {
           className="p-0.5 hover:bg-zinc-200 rounded-xl cursor-pointer"
           onClick={() => setShowMenu((prev) => !prev)}
         >
-          <img src="src/assets/menu.png" className="h-7 w-9" alt="Menu" />
+          <img src="/menu.png" className="h-7 w-9" alt="Menu" />
         </div>
 
         {showMenu && (
           <div className="absolute top-10 left-0.5  bg-white shadow-lg rounded-md w-14 border border-gray-200">
             <button
               className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-              onClick={() => alert("Edit clicked")}
+              onClick={HandleEditClickFn}
             >
-              <img src="src/assets/edit.gif" className="h-7 w-9" alt="Menu" />
+              <img src="/edit.gif" className="h-7 w-9" alt="Menu" />
 
               {/* <i className="ri-file-edit-fill text-blue-900 text-2xl"></i> */}
             </button>
@@ -32,7 +37,7 @@ const BannerCard = (props) => {
               className="block w-full text-left px-4 py-2 hover:bg-gray-100"
               onClick={() => props.onDelete(props.DBid)}
             >
-              <img src="src/assets/bin.gif" className="h-7 w-9" alt="Menu" />
+              <img src="/bin.gif" className="h-7 w-9" alt="Menu" />
               {/* <i className="ri-delete-bin-6-fill text-amber-900 text-2xl"></i> */}
             </button>
           </div>

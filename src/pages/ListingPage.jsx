@@ -72,6 +72,7 @@ const ListingPage = () => {
                   email={listing.Email}
                   DBid={listing._id}
                   onDelete = {DeleteListing}
+                  type="listing"
                 ></ListingCard>
               );
             })}
